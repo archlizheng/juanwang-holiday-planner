@@ -97,4 +97,7 @@ Compatibility rules:
 - Preserve existing `checkins` and `reviews` when modifying a synced HTML.
 - Use `icon` as the phase display field; do not reintroduce legacy `emoji` as the primary field.
 - Phase end day is `max(dailyTasks[].day where phaseId === phase.id)`, never a hardcoded formula.
+
+Injection safety:
+- The initial `APP_DATA` block written at generation time is NOT auto-escaped (only the in-app "sync to HTML" path escapes via `.replace(/<\//g, '<\\/')`). When you write `APP_DATA` into the template, escape every `</` in string values (goals, notes, tips, If-Then text) to `<\/`. An unescaped `</script>` anywhere in `APP_DATA` terminates the script block and breaks the page. `scripts/validate.mjs` enforces `<script>`/`</script>` balance as a backstop.
 </app_data_schema>

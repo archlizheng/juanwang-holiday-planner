@@ -66,6 +66,15 @@ for (const mood of moods) {
 const moodMatches = html.match(/data-mood="([^"]+)"/g) || [];
 if (moodMatches.length !== 5) fail(`心情按钮数量应为 5，实际 ${moodMatches.length}`);
 
+// HTML 解析层：<script> 与 </script> 必须成对。任何字面 </script>（即便在 JS 注释或字符串里）
+// 都会被浏览器解析器当作脚本结束，使后续 JS 暴露成页面文本、页面崩坏。
+// 正则提取式的 smoke-test 跑的是 node、不经过 HTML 解析器，发现不了这一点，故在此把守。
+const openScripts = (html.match(/<script\b/gi) || []).length;
+const closeScripts = (html.match(/<\/script>/gi) || []).length;
+if (openScripts !== closeScripts) {
+  fail(`<script> 与 </script> 数量不匹配（${openScripts} vs ${closeScripts}）：可能有字面 </script> 提前闭合脚本块，会导致页面渲染崩坏`);
+}
+
 if (!data.config?.user?.startDate) fail('缺少 config.user.startDate');
 if (!Array.isArray(data.phases) || !data.phases.length) fail('phases 为空');
 if (!Array.isArray(data.dailyTasks) || !data.dailyTasks.length) fail('dailyTasks 为空');

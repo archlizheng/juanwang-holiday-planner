@@ -1636,7 +1636,7 @@ function buildSyncedHtml(syncData) {
  const template = capturePageTemplate();
  const now = new Date();
  const ts = now.getFullYear() + '' + String(now.getMonth()+1).padStart(2,'0') + String(now.getDate()).padStart(2,'0') + '-' + String(now.getHours()).padStart(2,'0') + String(now.getMinutes()).padStart(2,'0');
- // JSON 中的 "</" 必须转义为 "<\/"，否则用户备注里出现 </script> 会提前终止脚本标签
+ // 把 JSON 里的 "</" 统一转义为 "<\/"，避免用户备注中的脚本结束标签提前截断本 script 块
  const appJson = JSON.stringify(syncData, null, 2).replace(/<\//g, '<\\/');
  const appBlock = '/*__APP_DATA_START__*/\nconst APP_DATA = ' + appJson + ';\n/*__APP_DATA_END__*/';
  // 用函数替换，避免用户笔记中的 $& 等字符被当作替换模式展开
