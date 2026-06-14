@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#e08a4d">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<!-- 单文件 HTML：无 PWA 依赖 -->
+<meta name="description" content="不靠意志力，靠可执行的规划——让假期不再摆烂">
+<title>卷王·假期成长规划</title>
+<meta name="generated-at" content="">
+<script>
+/**
+ * 卷王·假期成长规划 SVG 图标库
+ * 风格：几何线性 + 实心填充，1.5-2px 笔画，圆角端点，统一 24x24 viewBox
+ * 颜色：用 currentColor 继承父元素
+ *
+ * 使用方法：
+ * <svg class="icon"><use href="#icon-xxx" /></svg>
+ * 或
+ * <span data-icon="xxx"></span>
+ */
+
+const Icons = {
+  'fire': { cat: '状态', svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c4 0 7-3 7-7 0-3-2-5-3-7 0 2-1 3-2 3 0-3 1-5-1-7-1 2-2 3-3 4-3 3-5 5-5 7 0 4 3 7 7 7z" fill="currentColor" opacity="0.15"/><path d="M12 21c4 0 7-3 7-7 0-3-2-5-3-7 0 2-1 3-2 3 0-3 1-5-1-7-1 2-2 3-3 4-3 3-5 5-5 7 0 4 3 7 7 7z"/></svg>' },
+  'check': { cat: '状态', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"5 12 10 17 19 7\"/></svg>' },
+  'check-circle': { cat: '状态', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\" fill=\"currentColor\" opacity=\"0.12\"/><circle cx=\"12\" cy=\"12\" r=\"9\"/><polyline points=\"8 12 11 15 16 9\"/></svg>' },
+  'close': { cat: '状态', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\"/><line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\"/></svg>' },
+  'save': { cat: '状态', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 3h11l3 3v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z\" fill=\"currentColor\" opacity=\"0.1\"/><path d=\"M5 3h11l3 3v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z\"/><polyline points=\"7 3 7 9 15 9\"/></svg>' },
+  'sync': { cat: '状态', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"19 5 19 9 15 9\"/><polyline points=\"5 19 5 15 9 15\"/><path d=\"M5 9a7 7 0 0 1 12-2l2 2\"/><path d=\"M19 15a7 7 0 0 1-12 2l-2-2\"/></svg>' },
+  'calendar': { cat: '数据', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"4\" y=\"5\" width=\"16\" height=\"16\" rx=\"2\" fill=\"currentColor\" opacity=\"0.1\"/><rect x=\"4\" y=\"5\" width=\"16\" height=\"16\" rx=\"2\"/><line x1=\"4\" y1=\"10\" x2=\"20\" y2=\"10\"/><line x1=\"8\" y1=\"3\" x2=\"8\" y2=\"7\"/><line x1=\"16\" y1=\"3\" x2=\"16\" y2=\"7\"/></svg>' },
+  'chart-bar': { cat: '数据', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"6\" y1=\"20\" x2=\"6\" y2=\"14\"/><line x1=\"12\" y1=\"20\" x2=\"12\" y2=\"8\"/><line x1=\"18\" y1=\"20\" x2=\"18\" y2=\"4\"/><line x1=\"3\" y1=\"21\" x2=\"21\" y2=\"21\"/></svg>' },
+  'trending': { cat: '数据', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"3 17 9 11 13 15 21 7\"/><polyline points=\"15 7 21 7 21 13\"/></svg>' },
+  'checklist': { cat: '数据', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"2\" fill=\"currentColor\" opacity=\"0.1\"/><rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"2\"/><polyline points=\"8 9 10 11 13 8\"/><line x1=\"10\" y1=\"14\" x2=\"16\" y2=\"14\"/><line x1=\"10\" y1=\"17\" x2=\"16\" y2=\"17\"/></svg>' },
+  'map-pin': { cat: '数据', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 21c-4-5-7-8-7-12a7 7 0 0 1 14 0c0 4-3 7-7 12z\" fill=\"currentColor\" opacity=\"0.12\"/><path d=\"M12 21c-4-5-7-8-7-12a7 7 0 0 1 14 0c0 4-3 7-7 12z\"/><circle cx=\"12\" cy=\"9\" r=\"2.5\"/></svg>' },
+  'lightbulb': { cat: '数据', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9 16h6\"/><path d=\"M10 20h4\"/><path d=\"M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z\" fill=\"currentColor\" opacity=\"0.15\"/><path d=\"M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z\"/></svg>' },
+  'walk': { cat: '健康', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"13\" cy=\"4\" r=\"2\" fill=\"currentColor\"/><path d=\"M10 11l3-2 2 3\"/><path d=\"M13 9l-1 3 1 4 -2 6\"/><path d=\"M11 16l-3 6\"/><path d=\"M15 12l3 1 3 3\"/></svg>' },
+  'run': { cat: '健康', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"16\" cy=\"4\" r=\"2\" fill=\"currentColor\"/><path d=\"M12 9l3-2 2 2\"/><path d=\"M13 11l-2 4 2 4 -1 4\"/><path d=\"M11 15l-4 7\"/><path d=\"M15 13l3 1 3 3\"/></svg>' },
+  'water-drop': { cat: '健康', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M6 5h12l-1 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L6 5z\" fill=\"currentColor\" opacity=\"0.08\"/><path d=\"M6 5h12l-1 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L6 5z\"/><path d=\"M7.5 9.5c1.5 0 1.5 1.5 3 1.5s1.5-1.5 3-1.5 1.5 1.5 3 1.5\" fill=\"currentColor\" opacity=\"0.18\"/><path d=\"M7.5 9.5c1.5 0 1.5 1.5 3 1.5s1.5-1.5 3-1.5 1.5 1.5 3 1.5\" /><line x1=\"6\" y1=\"5\" x2=\"18\" y2=\"5\"/></svg>' },
+  'heart': { cat: '健康', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 20.5C6 17 3 13 3 9.5A4.5 4.5 0 0 1 12 6a4.5 4.5 0 0 1 9 3.5c0 3.5-3 7.5-9 11z\" fill=\"currentColor\" opacity=\"0.15\"/><path d=\"M12 20.5C6 17 3 13 3 9.5A4.5 4.5 0 0 1 12 6a4.5 4.5 0 0 1 9 3.5c0 3.5-3 7.5-9 11z\"/></svg>' },
+  'moon': { cat: '健康', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M20 14.5A8 8 0 1 1 10 4a6 6 0 0 0 10 10.5z\" fill=\"currentColor\" opacity=\"0.15\"/><path d=\"M20 14.5A8 8 0 1 1 10 4a6 6 0 0 0 10 10.5z\"/></svg>' },
+  'sprout': { cat: '阶段', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 22v-10\"/><path d=\"M12 12c-3 0-6 1.5-6 4 2.5-.4 4.7-2.2 6-4z\" fill=\"currentColor\" opacity=\"0.2\"/><path d=\"M12 12c3 0 6 1.5 6 4-2.5-.4-4.7-2.2-6-4z\" fill=\"currentColor\" opacity=\"0.2\"/><line x1=\"6\" y1=\"22\" x2=\"18\" y2=\"22\"/></svg>' },
+  'leaf': { cat: '阶段', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 20c0-8 7-14 16-14 0 9-6 15-16 14z\" fill=\"currentColor\" opacity=\"0.15\"/><path d=\"M4 20c0-8 7-14 16-14 0 9-6 15-16 14z\"/><path d=\"M8 16l-4 4\"/></svg>' },
+  'tree': { cat: '阶段', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3L7 11h3l-4 6h4l-3 4h10l-3-4h4l-4-6h3L12 3z\" fill=\"currentColor\" opacity=\"0.15\"/><path d=\"M12 3L7 11h3l-4 6h4l-3 4h10l-3-4h4l-4-6h3L12 3z\"/><line x1=\"12\" y1=\"21\" x2=\"12\" y2=\"23\"/></svg>' },
+  'rocket': { cat: '阶段', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3c-3 0-5 3-5 7v6l2 2 1 3h4l1-3 2-2v-6c0-4-2-7-5-7z\" fill=\"currentColor\" opacity=\"0.15\"/><path d=\"M12 3c-3 0-5 3-5 7v6l2 2 1 3h4l1-3 2-2v-6c0-4-2-7-5-7z\"/><circle cx=\"12\" cy=\"10\" r=\"1.5\"/><path d=\"M7 15l-2 3 3-1\"/><path d=\"M17 15l2 3-3-1\"/></svg>' },
+  'trophy': { cat: '阶段', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M7 4h10v6a5 5 0 0 1-10 0V4z\" fill=\"currentColor\" opacity=\"0.15\"/><path d=\"M7 4h10v6a5 5 0 0 1-10 0V4z\"/><path d=\"M5 4H3v3a3 3 0 0 0 3 3\"/><path d=\"M19 4h2v3a3 3 0 0 1-3 3\"/><line x1=\"8\" y1=\"21\" x2=\"16\" y2=\"21\"/><line x1=\"12\" y1=\"15\" x2=\"12\" y2=\"21\"/><line x1=\"9\" y1=\"18\" x2=\"15\" y2=\"18\"/></svg>' },
+  'medal': { cat: '阶段', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polygon points=\"8 3 12 6 16 3 14 9 10 9\" fill=\"currentColor\" opacity=\"0.15\"/><polygon points=\"8 3 12 6 16 3 14 9 10 9\"/><circle cx=\"12\" cy=\"15\" r=\"5\" fill=\"currentColor\" opacity=\"0.15\"/><circle cx=\"12\" cy=\"15\" r=\"5\"/><circle cx=\"12\" cy=\"15\" r=\"2\"/></svg>' },
+  'crown': { cat: '阶段', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 7l3 5 6-7 6 7 3-5-1 12H4L3 7z\" fill=\"currentColor\" opacity=\"0.15\"/><path d=\"M3 7l3 5 6-7 6 7 3-5-1 12H4L3 7z\"/><circle cx=\"3\" cy=\"7\" r=\"0.8\" fill=\"currentColor\"/><circle cx=\"21\" cy=\"7\" r=\"0.8\" fill=\"currentColor\"/><circle cx=\"12\" cy=\"5\" r=\"0.8\" fill=\"currentColor\"/></svg>' },
+  'target': { cat: '目标', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><circle cx=\"12\" cy=\"12\" r=\"6\" fill=\"currentColor\" opacity=\"0.15\"/><circle cx=\"12\" cy=\"12\" r=\"6\"/><circle cx=\"12\" cy=\"12\" r=\"2.5\"/></svg>' },
+  'gift': { cat: '目标', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"9\" width=\"18\" height=\"12\" rx=\"1\" fill=\"currentColor\" opacity=\"0.12\"/><rect x=\"3\" y=\"9\" width=\"18\" height=\"12\" rx=\"1\"/><line x1=\"12\" y1=\"9\" x2=\"12\" y2=\"21\"/><line x1=\"3\" y1=\"14\" x2=\"21\" y2=\"14\"/><path d=\"M12 9c-2-3-5-3-5-1s2 2 5 1z\" fill=\"currentColor\" opacity=\"0.2\"/><path d=\"M12 9c2-3 5-3 5-1s-2 2-5 1z\" fill=\"currentColor\" opacity=\"0.2\"/></svg>' },
+  'idea': { cat: '目标', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"4\" fill=\"currentColor\" opacity=\"0.15\"/><circle cx=\"12\" cy=\"12\" r=\"4\"/><line x1=\"12\" y1=\"2\" x2=\"12\" y2=\"4\"/><line x1=\"12\" y1=\"20\" x2=\"12\" y2=\"22\"/><line x1=\"4.93\" y1=\"4.93\" x2=\"6.34\" y2=\"6.34\"/><line x1=\"17.66\" y1=\"17.66\" x2=\"19.07\" y2=\"19.07\"/><line x1=\"2\" y1=\"12\" x2=\"4\" y2=\"12\"/><line x1=\"20\" y1=\"12\" x2=\"22\" y2=\"12\"/><line x1=\"4.93\" y1=\"19.07\" x2=\"6.34\" y2=\"17.66\"/><line x1=\"17.66\" y1=\"6.34\" x2=\"19.07\" y2=\"4.93\"/></svg>' },
+  'thought': { cat: '目标', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M20 11a8 8 0 0 1-7 11l-2-1-2 1-3-1 2-5a8 8 0 0 1 4-13 8 8 0 0 1 8 8z\" fill=\"currentColor\" opacity=\"0.1\"/><path d=\"M20 11a8 8 0 0 1-7 11l-2-1-2 1-3-1 2-5a8 8 0 0 1 4-13 8 8 0 0 1 8 8z\"/><circle cx=\"9\" cy=\"11\" r=\"0.8\" fill=\"currentColor\"/><circle cx=\"12\" cy=\"11\" r=\"0.8\" fill=\"currentColor\"/><circle cx=\"15\" cy=\"11\" r=\"0.8\" fill=\"currentColor\"/></svg>' },
+  'palette': { cat: '目标', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 21a9 9 0 1 1 9-9c0 3-2 5-5 5h-1a2 2 0 0 0-1.5 3.3 1.5 1.5 0 0 1-1 .7z\" fill=\"currentColor\" opacity=\"0.1\"/><path d=\"M12 21a9 9 0 1 1 9-9c0 3-2 5-5 5h-1a2 2 0 0 0-1.5 3.3 1.5 1.5 0 0 1-1 .7z\"/><circle cx=\"7.5\" cy=\"10.5\" r=\"0.8\" fill=\"currentColor\"/><circle cx=\"9.5\" cy=\"7\" r=\"0.8\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"7\" r=\"0.8\" fill=\"currentColor\"/><circle cx=\"17\" cy=\"10\" r=\"0.8\" fill=\"currentColor\"/></svg>' },
+  'user': { cat: '提醒', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"8\" r=\"4\" fill=\"currentColor\" opacity=\"0.15\"/><circle cx=\"12\" cy=\"8\" r=\"4\"/><path d=\"M4 21c0-4 3.5-7 8-7s8 3 8 7\"/></svg>' },
+  'wave': { cat: '提醒', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M2 12c1.5 0 1.5-3 3-3s1.5 3 3 3 1.5-3 3-3 1.5 3 3 3 1.5-3 3-3 1.5 3 3 3\"/></svg>' },
+  'alert': { cat: '提醒', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M10.3 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z\" fill=\"currentColor\" opacity=\"0.12\"/><path d=\"M10.3 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z\"/><line x1=\"12\" y1=\"9\" x2=\"12\" y2=\"13\"/><circle cx=\"12\" cy=\"17\" r=\"0.5\" fill=\"currentColor\"/></svg>' },
+  'package': { cat: '数据交换', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M21 8L12 3 3 8v8l9 5 9-5V8z\" fill=\"currentColor\" opacity=\"0.1\"/><path d=\"M21 8L12 3 3 8v8l9 5 9-5V8z\"/><polyline points=\"3 8 12 13 21 8\"/><line x1=\"12\" y1=\"22\" x2=\"12\" y2=\"13\"/></svg>' },
+  'download': { cat: '数据交换', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\"/><polyline points=\"7 11 12 16 17 11\"/><line x1=\"12\" y1=\"4\" x2=\"12\" y2=\"16\"/></svg>' },
+  'upload': { cat: '数据交换', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\"/><polyline points=\"17 8 12 3 7 8\"/><line x1=\"12\" y1=\"3\" x2=\"12\" y2=\"16\"/></svg>' },
+  'phone-add': { cat: '数据交换', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"6\" y=\"2\" width=\"12\" height=\"20\" rx=\"2\" fill=\"currentColor\" opacity=\"0.1\"/><rect x=\"6\" y=\"2\" width=\"12\" height=\"20\" rx=\"2\"/><line x1=\"9\" y1=\"18\" x2=\"15\" y2=\"18\"/></svg>' },
+  'mood-happy': { cat: '心情', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\" fill=\"currentColor\" opacity=\"0.1\"/><circle cx=\"12\" cy=\"12\" r=\"9\"/><circle cx=\"9\" cy=\"10\" r=\"0.8\" fill=\"currentColor\"/><circle cx=\"15\" cy=\"10\" r=\"0.8\" fill=\"currentColor\"/><path d=\"M8 14.5c1 1.5 2.5 2 4 2s3-.5 4-2\"/></svg>' },
+  'mood-content': { cat: '心情', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\" fill=\"currentColor\" opacity=\"0.1\"/><circle cx=\"12\" cy=\"12\" r=\"9\"/><circle cx=\"9\" cy=\"10\" r=\"0.8\" fill=\"currentColor\"/><circle cx=\"15\" cy=\"10\" r=\"0.8\" fill=\"currentColor\"/><path d=\"M8.5 14.5c1 1 2.2 1.5 3.5 1.5s2.5-.5 3.5-1.5\"/></svg>' },
+  'mood-peaceful': { cat: '心情', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\" fill=\"currentColor\" opacity=\"0.1\"/><circle cx=\"12\" cy=\"12\" r=\"9\"/><line x1=\"8\" y1=\"10\" x2=\"10\" y2=\"10\"/><line x1=\"14\" y1=\"10\" x2=\"16\" y2=\"10\"/><path d=\"M9 14.5c0.8 0.8 1.8 1.2 3 1.2s2.2-.4 3-1.2\"/></svg>' },
+  'mood-strong': { cat: '心情', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\" fill=\"currentColor\" opacity=\"0.1\"/><circle cx=\"12\" cy=\"12\" r=\"9\"/><circle cx=\"9\" cy=\"10\" r=\"0.8\" fill=\"currentColor\"/><circle cx=\"15\" cy=\"10\" r=\"0.8\" fill=\"currentColor\"/><path d=\"M7 14l2 1.5L12 12l3 3.5L17 14\"/></svg>' },
+  'mood-onfire': { cat: '心情', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\" fill=\"currentColor\" opacity=\"0.1\"/><circle cx=\"12\" cy=\"12\" r=\"9\"/><circle cx=\"9\" cy=\"10\" r=\"0.8\" fill=\"currentColor\"/><circle cx=\"15\" cy=\"10\" r=\"0.8\" fill=\"currentColor\"/><path d=\"M7 13c1 2 3 3 5 3s4-1 5-3\"/><path d=\"M9 17l1.5-1L12 18l1.5-2L15 17\"/></svg>' },
+  'mood-tired': { cat: '心情', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\" fill=\"currentColor\" opacity=\"0.1\"/><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M8 10h2\"/><path d=\"M14 10h2\"/><path d=\"M9 14.5c1 0.8 2 1.2 3 1.2s2-.4 3-1.2\"/></svg>' },
+  'mood-neutral': { cat: '心情', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\" fill=\"currentColor\" opacity=\"0.1\"/><circle cx=\"12\" cy=\"12\" r=\"9\"/><circle cx=\"9\" cy=\"10\" r=\"0.8\" fill=\"currentColor\"/><circle cx=\"15\" cy=\"10\" r=\"0.8\" fill=\"currentColor\"/><line x1=\"8.5\" y1=\"14.5\" x2=\"15.5\" y2=\"14.5\"/></svg>' },
+  'mood-struggle': { cat: '心情', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\" fill=\"currentColor\" opacity=\"0.1\"/><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M8 10h2\"/><path d=\"M14 10h2\"/><path d=\"M8 15.5c1-1 2.5-1.5 4-1.5s3 .5 4 1.5\"/><path d=\"M7.5 7.5l1-1\"/><path d=\"M15.5 7.5l1-1\"/></svg>' },
+  'mood-sad': { cat: '心情', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\" fill=\"currentColor\" opacity=\"0.1\"/><circle cx=\"12\" cy=\"12\" r=\"9\"/><circle cx=\"9\" cy=\"10\" r=\"0.8\" fill=\"currentColor\"/><circle cx=\"15\" cy=\"10\" r=\"0.8\" fill=\"currentColor\"/><path d=\"M8 16c1-1.5 2.5-2 4-2s3 .5 4 2\"/></svg>' },
+  'mood-bored': { cat: '心情', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\" fill=\"currentColor\" opacity=\"0.1\"/><circle cx=\"12\" cy=\"12\" r=\"9\"/><line x1=\"8\" y1=\"10\" x2=\"10\" y2=\"10\"/><line x1=\"14\" y1=\"10\" x2=\"16\" y2=\"10\"/><line x1=\"8\" y1=\"14.5\" x2=\"16\" y2=\"14.5\"/></svg>' },
+  'mood-think': { cat: '心情', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\" fill=\"currentColor\" opacity=\"0.1\"/><circle cx=\"12\" cy=\"12\" r=\"9\"/><line x1=\"9\" y1=\"10\" x2=\"9.01\" y2=\"10\"/><line x1=\"15\" y1=\"10\" x2=\"15.01\" y2=\"10\"/><path d=\"M9 15c1 0.7 2 1 3 1s2-.3 3-1\"/><line x1=\"12\" y1=\"6\" x2=\"12\" y2=\"4\"/></svg>' },
+  'mood-cool': { cat: '心情', svg: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\" fill=\"currentColor\" opacity=\"0.1\"/><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M9 8l-1 1\"/><path d=\"M15 8l1 1\"/><line x1=\"8\" y1=\"14\" x2=\"16\" y2=\"14\"/></svg>' },
+};
+
+// 渲染辅助函数：把 icon name 转换为 inline SVG (兼容新旧对象/字符串格式)
+function icon(name, size) {
+ var def = Icons[name];
+ var svg = (def && def.svg) ? def.svg : def;
+ size = size || 20;
+ return svg.replace(/<svg /, '<svg width="' + size + '" height="' + size + '" ');
+}
+
+// 批量替换工具：把所有 <span data-icon="xxx"></span> 替换为 inline SVG
+function renderIcons(root) {
+ root = root || document;
+ root.querySelectorAll('[data-icon]').forEach(function(el) {
+  if (el.querySelector('svg')) return; // 已渲染过
+ var name = el.dataset.icon;
+ if (Icons[name]) {
+ el.innerHTML = icon(name, el.dataset.size || 18);
+ }
+ });
+}
+
+// 监听 DOM 变化，自动渲染新插入的 data-icon (等 DOM ready 后再启动)
+function startIconObserver() {
+ if (typeof MutationObserver === 'undefined' || !document.body) return;
+ var iconObserver = new MutationObserver(function(mutations) {
+ mutations.forEach(function(m) {
+ m.addedNodes.forEach(function(node) {
+ if (node.nodeType === 1) {
+ if (node.matches && node.matches('[data-icon]')) {
+ renderIcons(node.parentNode || document);
+ }
+ if (node.querySelectorAll) {
+ renderIcons(node);
+ }
+ }
+ });
+ });
+ });
+ iconObserver.observe(document.body, { childList: true, subtree: true });
+}
+if (document.readyState === 'loading') {
+ document.addEventListener('DOMContentLoaded', startIconObserver);
+} else {
+ startIconObserver();
+}
+</script>
+
+<style>
+:root{
+ --bg:#f6f1e8;
+ --paper:#fbf7ef;
+ --ink:#3a3328;
+ --ink-soft:#6b6356;
+ --ink-light:#9a8f7c;
+ --line:#e8dfce;
+ --orange:#e08a4d;
+ --orange-soft:#f3c79e;
+ --orange-pale:#fce8d4;
+ --blue:#7a98ad;
+ --blue-soft:#cfdce6;
+ --green:#8aa37b;
+ --green-soft:#d8e3cf;
+ --pink:#d99a8d;
+ --rose:#c47361;
+ --yellow:#f3d27a;
+ --shadow-sm:0 2px 8px rgba(58,51,40,0.04);
+ --shadow-md:0 4px 16px -2px rgba(58,51,40,0.06);
+ --shadow-lg:0 8px 24px -4px rgba(58,51,40,0.08);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;color:var(--ink);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body{min-height:100vh;min-height:100dvh;padding-bottom:80px;padding-top:env(safe-area-inset-top);padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+button{font-family:inherit;font-size:inherit;border:none;background:none;cursor:pointer;color:inherit}
+input,select,textarea{font-family:inherit;font-size:inherit;color:inherit}
+
+.topbar{
+ position:sticky;top:0;z-index:50;
+ background:rgba(251,247,239,0.92);
+ backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+ border-bottom:1px solid var(--line);
+ padding:14px 16px 12px;
+ display:flex;align-items:center;justify-content:space-between;
+}
+.topbar-left{font-size:13px;color:var(--ink-soft);font-weight:500}
+.topbar-left .emoji{margin-right:4px}
+.topbar-right{display:flex;align-items:center;gap:10px;font-size:12px}
+.streak-pill{
+ background:linear-gradient(135deg,var(--orange-pale),var(--orange-soft));
+ color:var(--rose);
+ padding:4px 10px;border-radius:20px;
+ font-weight:600;font-size:12px;
+ display:flex;align-items:center;gap:3px;
+}
+.streak-pill .fire{font-size:13px}
+
+.screen{display:none;padding:0 16px}
+.screen.active{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+.welcome-card{
+ background:linear-gradient(135deg,var(--paper) 0%, var(--orange-pale) 100%);
+ border-radius:20px;padding:20px 18px;margin-top:16px;
+ box-shadow:var(--shadow-sm);
+ border:1px solid var(--orange-soft);
+}
+.welcome-card h2{font-size:18px;margin:0 0 6px;font-weight:700}
+.welcome-card .meta{font-size:12px;color:var(--ink-soft)}
+.welcome-card .meta span{margin-right:10px}
+
+.section-title{
+ display:flex;align-items:center;gap:8px;
+ font-size:15px;font-weight:700;margin:24px 0 12px;
+ color:var(--ink);
+}
+.section-title::before{
+ content:"";display:inline-block;width:3px;height:14px;
+ background:var(--orange);border-radius:2px;
+}
+.section-title .count{
+ font-size:12px;font-weight:500;color:var(--ink-light);
+ margin-left:auto;
+}
+
+.phase-list{display:flex;flex-direction:column;gap:12px}
+.phase-card{
+ background:var(--paper);border-radius:16px;padding:14px 16px;
+ box-shadow:var(--shadow-sm);
+ border:1px solid var(--line);
+ display:flex;align-items:center;gap:12px;
+ transition:transform .2s;
+}
+.phase-card:active{transform:scale(0.98)}
+.phase-emoji{font-size:32px;line-height:1;flex-shrink:0}
+.phase-body{flex:1;min-width:0}
+.phase-title{font-size:15px;font-weight:700;display:flex;align-items:center;gap:6px}
+.phase-range{font-size:11px;color:var(--ink-light);margin-top:1px}
+.phase-theme{font-size:12px;color:var(--ink-soft);margin-top:4px;line-height:1.4}
+.phase-status{
+ flex-shrink:0;font-size:11px;padding:3px 8px;border-radius:10px;
+ font-weight:600;
+}
+.phase-status.current{background:var(--orange);color:white}
+.phase-status.done{background:var(--green-soft);color:var(--green)}
+.phase-status.todo{background:var(--line);color:var(--ink-light)}
+
+.task-list{display:flex;flex-direction:column;gap:8px}
+.task-item{
+ background:var(--paper);border-radius:14px;padding:12px 14px;
+ display:flex;align-items:flex-start;gap:10px;
+ border:1px solid var(--line);
+ transition:all .2s;
+}
+.task-item.is-today-legacy{
+ border-color:var(--orange);
+ background:linear-gradient(135deg,var(--paper),var(--orange-pale));
+ box-shadow:0 0 0 3px rgba(224,138,77,0.1);
+}
+.task-item.is-selected{
+ border-color:var(--blue);
+ box-shadow:0 0 0 2px rgba(122,152,173,0.25);
+}
+.task-item:active{transform:scale(0.99)}
+.task-date{font-size:10px;color:var(--ink-light);margin-top:4px;font-variant-numeric:tabular-nums}
+.task-day{
+ flex-shrink:0;width:36px;text-align:center;
+ background:var(--line);border-radius:10px;padding:4px 0;
+ font-size:11px;color:var(--ink-soft);font-weight:600;
+}
+.task-day.is-today-legacy{background:var(--orange);color:white}
+.task-day .day-num{font-size:14px;font-weight:700;display:block;margin-top:1px}
+.task-content{flex:1;min-width:0}
+.task-main{font-size:13px;font-weight:600;line-height:1.4}
+.task-elastic{font-size:12px;color:var(--ink-soft);margin-top:3px}
+.task-tag{
+ display:inline-block;font-size:10px;
+ padding:1px 6px;border-radius:6px;
+ margin-top:5px;font-weight:500;
+}
+.tag-phase{background:var(--blue-soft);color:var(--blue)}
+.tag-phase.p1{background:var(--green-soft);color:var(--green)}
+.tag-phase.p2{background:var(--yellow);color:#8b6914}
+.tag-phase.p3{background:var(--orange-soft);color:var(--rose)}
+
+.day-header{
+ text-align:center;padding:20px 0 14px;
+}
+.day-header .phase-tag{
+ display:inline-block;font-size:11px;padding:3px 10px;
+ border-radius:12px;background:var(--orange-pale);color:var(--rose);
+ font-weight:600;margin-bottom:8px;
+}
+.day-header h2{font-size:22px;margin:4px 0 2px;font-weight:700}
+.day-header .date{font-size:12px;color:var(--ink-light)}
+.day-nav{display:flex;align-items:center;justify-content:center;gap:12px;margin:6px 0 2px}
+.day-nav h2{margin:0;min-width:80px;text-align:center}
+.day-nav-btn{background:transparent;border:1px solid var(--line);color:var(--ink);width:32px;height:32px;border-radius:50%;font-size:18px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;transition:all 0.15s}
+.day-nav-btn:hover:not(:disabled){background:var(--paper);border-color:var(--orange);color:var(--orange)}
+.day-nav-btn:active:not(:disabled){transform:scale(0.92)}
+.day-nav-btn:disabled{opacity:0.3;cursor:not-allowed}
+
+.task-card{
+ background:var(--paper);border-radius:18px;padding:16px;
+ box-shadow:var(--shadow-sm);
+ border:1px solid var(--line);
+ margin-bottom:12px;
+}
+.task-check{
+ display:flex;align-items:flex-start;gap:12px;cursor:pointer;
+ padding:8px;border-radius:12px;margin:-8px;
+ transition:background .2s;
+ -webkit-user-select:none;user-select:none;
+}
+.task-check:active{background:var(--orange-pale)}
+.task-check.done .task-text{color:var(--ink-light);text-decoration:line-through}
+.task-checkbox{
+ flex-shrink:0;width:26px;height:26px;border-radius:50%;
+ border:2px solid var(--line);
+ display:flex;align-items:center;justify-content:center;
+ transition:all .2s;font-size:14px;color:white;
+}
+.task-checkbox.checked{background:var(--green);border-color:var(--green)}
+.task-text{flex:1;font-size:14px;font-weight:600;line-height:1.5}
+.task-meta{font-size:11px;color:var(--ink-light);margin-top:4px;font-weight:normal}
+.task-tip{
+ font-size:12px;color:var(--ink-soft);font-style:italic;
+ margin-top:8px;padding:8px 10px;
+ background:var(--orange-pale);border-radius:10px;
+ line-height:1.5;
+}
+
+.health-card{
+ background:linear-gradient(135deg,var(--green-soft),#eef2e9);
+ border-radius:18px;padding:16px;
+ margin-bottom:12px;
+}
+.health-title{
+ font-size:13px;font-weight:700;color:var(--green);
+ display:flex;align-items:center;gap:6px;margin-bottom:12px;
+}
+.health-grid{
+ display:grid;grid-template-columns:1fr 1fr;gap:10px;
+}
+.health-item{
+ background:rgba(255,255,255,0.7);border-radius:12px;
+ padding:10px 12px;
+}
+.health-label{font-size:11px;color:var(--ink-soft);margin-bottom:4px}
+.health-input{
+ width:100%;border:none;background:transparent;
+ font-size:18px;font-weight:700;color:var(--ink);
+ padding:0;outline:none;
+}
+.health-input::placeholder{color:var(--ink-light);font-weight:400}
+.health-unit{font-size:11px;color:var(--ink-light);margin-left:2px}
+
+.mood-card{
+ background:var(--paper);border-radius:18px;padding:16px;
+ margin-bottom:12px;border:1px solid var(--line);
+}
+.mood-title{font-size:13px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.mood-options{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.mood-btn{
+ aspect-ratio:1;font-size:24px;
+ background:var(--line);border-radius:12px;
+ display:flex;align-items:center;justify-content:center;
+ transition:all .2s;
+}
+.mood-btn.active{background:var(--orange-pale);transform:scale(1.1);box-shadow:var(--shadow-sm)}
+
+.note-card{
+ background:var(--paper);border-radius:18px;padding:16px;
+ margin-bottom:12px;border:1px solid var(--line);
+}
+.note-title{font-size:13px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.note-input{
+ width:100%;border:none;background:var(--bg);
+ border-radius:10px;padding:10px 12px;
+ font-size:13px;resize:none;outline:none;
+ min-height:60px;font-family:inherit;
+}
+
+.checkin-cta{
+ background:linear-gradient(135deg,var(--orange),#d6773a);
+ color:white;border-radius:18px;padding:16px;
+ font-size:15px;font-weight:700;
+ width:100%;display:flex;align-items:center;justify-content:center;gap:8px;
+ box-shadow:0 4px 16px rgba(224,138,77,0.3);
+ transition:all .2s;
+ margin-top:8px;
+}
+.checkin-cta:active{transform:scale(0.98);box-shadow:0 2px 8px rgba(224,138,77,0.3)}
+.checkin-cta:disabled{opacity:0.5}
+.checkin-cta.saved{background:linear-gradient(135deg,var(--green),#7a9571)}
+
+.dash-hero{
+ background:linear-gradient(135deg,var(--paper) 0%, var(--orange-pale) 100%);
+ border-radius:20px;padding:20px;
+ margin-top:16px;position:relative;overflow:hidden;
+ border:1px solid var(--orange-soft);
+}
+.dash-hero::before{
+ content:"";position:absolute;top:-30px;right:-30px;
+ width:120px;height:120px;border-radius:50%;
+ background:radial-gradient(circle,var(--orange-soft) 0%, transparent 70%);
+ opacity:0.4;
+}
+.dash-greeting{font-size:13px;color:var(--ink-soft);font-weight:500}
+.dash-name{font-size:22px;font-weight:700;margin:4px 0 10px}
+.dash-stats{display:flex;gap:16px;margin-top:8px}
+.dash-stat{flex:1}
+.dash-stat .num{font-size:24px;font-weight:700;color:var(--rose);line-height:1}
+.dash-stat .label{font-size:11px;color:var(--ink-soft);margin-top:4px}
+.dash-stat .unit{font-size:14px;font-weight:500;color:var(--ink-soft);margin-left:2px}
+
+.dash-grid{
+ display:grid;grid-template-columns:1fr 1fr;gap:10px;
+ margin-top:12px;
+}
+.dash-card{
+ background:var(--paper);border-radius:14px;padding:14px;
+ border:1px solid var(--line);
+}
+.dash-card-icon{font-size:20px;margin-bottom:6px}
+.dash-card-num{font-size:18px;font-weight:700;line-height:1}
+.dash-card-num .unit{font-size:12px;color:var(--ink-soft);font-weight:500;margin-left:2px}
+.dash-card-label{font-size:11px;color:var(--ink-soft);margin-top:4px}
+.dash-card .progress-bar{
+ height:6px;background:var(--line);border-radius:3px;
+ margin-top:8px;overflow:hidden;
+}
+.dash-card .progress-fill{height:100%;background:var(--orange);border-radius:3px;transition:width .5s}
+
+.calendar{
+ background:var(--paper);border-radius:16px;padding:14px;
+ border:1px solid var(--line);
+}
+.cal-header{
+ display:flex;justify-content:space-between;align-items:center;
+ margin-bottom:10px;
+}
+.cal-title{font-size:13px;font-weight:700}
+.cal-legend{display:flex;gap:8px;font-size:10px;color:var(--ink-soft)}
+.cal-legend span{display:flex;align-items:center;gap:3px}
+.cal-legend i{width:8px;height:8px;border-radius:2px;display:inline-block}
+.cal-legend i.done{background:var(--green)}
+.cal-legend i.partial{background:var(--orange-soft)}
+.cal-legend i.miss{background:var(--line)}
+.cal-grid{
+ display:grid;grid-template-columns:repeat(7,1fr);gap:4px;
+}
+.cal-day{
+ aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+ font-size:11px;border-radius:6px;
+ background:var(--line);color:var(--ink-soft);
+ position:relative;
+}
+.cal-day.done{background:var(--green);color:white;font-weight:600}
+.cal-day.partial{background:var(--orange-soft);color:var(--rose);font-weight:600}
+.cal-day.today{outline:2px solid var(--orange);outline-offset:1px}
+.cal-day.selected{outline:2px solid var(--blue);outline-offset:1px}
+.cal-day{cursor:pointer;transition:transform 0.15s}
+.cal-day:hover{transform:scale(1.08)}
+.cal-day:active{transform:scale(0.95)}
+.cal-day .check{position:absolute;bottom:1px;right:1px;font-size:7px;color:white}
+
+.health-trend{
+ background:var(--paper);border-radius:16px;padding:14px;
+ border:1px solid var(--line);
+}
+.trend-title{font-size:13px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.trend-bars{
+ display:flex;align-items:flex-end;gap:4px;height:60px;
+ padding-top:14px;
+}
+.trend-bar{
+ flex:1;background:var(--green-soft);border-radius:3px 3px 0 0;
+ position:relative;min-height:4px;
+ transition:height .5s;
+}
+.trend-bar .val{
+ position:absolute;top:-14px;left:50%;transform:translateX(-50%);
+ font-size:9px;color:var(--ink-soft);font-weight:600;
+ white-space:nowrap;
+}
+.trend-labels{
+ display:flex;justify-content:space-between;
+ font-size:9px;color:var(--ink-light);margin-top:4px;
+}
+
+.report-hero{
+ background:linear-gradient(135deg,var(--orange-pale) 0%, var(--paper) 100%);
+ border-radius:20px;padding:24px 20px;margin-top:16px;
+ text-align:center;position:relative;overflow:hidden;
+ border:1px solid var(--orange-soft);
+}
+.report-emoji{font-size:48px;margin-bottom:8px}
+.report-title{font-size:18px;font-weight:700;margin-bottom:4px}
+.report-subtitle{font-size:12px;color:var(--ink-soft);line-height:1.5;max-width:280px;margin:0 auto}
+
+.medals-section{
+ background:var(--paper);border-radius:16px;padding:16px;
+ margin-top:12px;border:1px solid var(--line);
+}
+.medals-title{font-size:14px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.medals-grid{
+ display:grid;grid-template-columns:repeat(4,1fr);gap:10px;
+}
+.medal{
+ aspect-ratio:1;display:flex;flex-direction:column;
+ align-items:center;justify-content:center;
+ border-radius:14px;
+ background:var(--line);
+ text-align:center;padding:6px 4px;
+ transition:all .3s;
+}
+.medal.unlocked{
+ background:linear-gradient(135deg,var(--orange-pale),var(--orange-soft));
+ box-shadow:0 4px 12px rgba(224,138,77,0.15);
+}
+.medal.locked{opacity:0.35;filter:grayscale(1)}
+.medal-emoji{font-size:24px;line-height:1}
+.medal-name{font-size:9px;font-weight:600;margin-top:4px;line-height:1.2}
+
+.data-summary{
+ background:var(--paper);border-radius:16px;padding:16px;
+ margin-top:12px;border:1px solid var(--line);
+}
+.summary-title{font-size:14px;font-weight:700;margin-bottom:12px}
+.summary-row{
+ display:flex;justify-content:space-between;align-items:center;
+ padding:8px 0;border-bottom:1px dashed var(--line);
+ font-size:13px;
+}
+.summary-row:last-child{border-bottom:none}
+.summary-label{color:var(--ink-soft)}
+.summary-value{font-weight:700;color:var(--ink)}
+
+.ai-summary{
+ background:linear-gradient(135deg,var(--blue-soft),#e8eef3);
+ border-radius:16px;padding:16px;margin-top:12px;
+ border:1px solid #cfdce6;
+}
+.ai-summary-title{font-size:13px;font-weight:700;color:var(--blue);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.ai-summary-content{font-size:13px;line-height:1.7;color:var(--ink)}
+.ai-summary-content p{margin:0 0 8px}
+.ai-summary-content p:last-child{margin:0}
+
+/* 4 段 phase 复盘卡片 */
+.review-card{
+  background:var(--paper);border:1px solid var(--line);border-radius:14px;
+  padding:14px 16px;margin-bottom:12px;
+}
+.review-card-head{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.review-card-head .phase-dot{width:8px;height:8px;border-radius:50%;background:var(--orange);flex-shrink:0}
+.review-card-head .phase-name{font-size:14px;font-weight:700;color:var(--ink)}
+.review-card-head .review-status{margin-left:auto;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600}
+.review-card-head .review-status.pending{background:var(--orange-pale);color:var(--orange)}
+.review-card-head .review-status.ready{background:rgba(224,138,77,0.15);color:var(--rose);animation:pulse 2s ease-in-out infinite}
+.review-card-head .review-status.done{background:var(--green-pale);color:var(--green)}
+.review-card-body{font-size:13px;line-height:1.7;color:var(--ink)}
+.review-card-body p{margin:0 0 8px}
+.review-card-body p:last-child{margin:0}
+.review-meta{font-size:10px;color:var(--ink-light);margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);display:flex;justify-content:space-between;align-items:center}
+.review-meta .version{font-family:monospace;background:var(--bg);padding:1px 6px;border-radius:4px}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.6}}
+.review-workflow{background:var(--bg);border-radius:10px;padding:10px 12px;margin-top:12px}
+.review-tip{margin:0;font-size:11px;color:var(--ink-soft);line-height:1.6}
+.review-tip code{font-family:monospace;background:var(--paper);padding:1px 5px;border-radius:4px;font-size:10px}
+
+.tabbar{
+ position:fixed;bottom:0;left:0;right:0;z-index:50;
+ background:rgba(251,247,239,0.95);
+ backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+ border-top:1px solid var(--line);
+ display:flex;
+ padding:6px 0 calc(6px + env(safe-area-inset-bottom));
+}
+.tab{
+ flex:1;display:flex;flex-direction:column;align-items:center;
+ gap:2px;padding:6px 4px;
+ color:var(--ink-light);
+ transition:color .2s;font-size:11px;
+}
+.tab-icon{font-size:22px;line-height:1}
+.tab.active{color:var(--orange);font-weight:700}
+.tab:active{opacity:0.6}
+
+.empty-hint{
+ text-align:center;padding:40px 20px;
+ color:var(--ink-light);font-size:13px;
+}
+.empty-icon{font-size:32px;margin-bottom:8px;opacity:0.5}
+
+/* ================== SVG 图标统一规范 ================== */
+[data-icon]{
+ display:inline-flex;
+ align-items:center;
+ justify-content:center;
+ width:1.4em;height:1.4em;
+ vertical-align:-0.18em;
+ line-height:1;
+ color:inherit;
+ margin-right:4px;
+}
+[data-icon]:last-child{margin-right:0}
+[data-icon] svg{
+ width:100%;height:100%;
+ display:block;
+}
+/* 颜色变体 */
+.icon-orange{color:var(--orange)}
+.icon-blue{color:var(--blue)}
+.icon-green{color:var(--green)}
+.icon-rose{color:var(--rose)}
+.icon-soft{color:var(--ink-soft)}
+.icon-light{color:var(--ink-light)}
+/* 大尺寸变体 */
+.icon-lg[data-icon]{width:1.8em;height:1.8em}
+.icon-xl[data-icon]{width:2.4em;height:2.4em}
+.icon-2x[data-icon]{width:2em;height:2em}
+.icon-3x[data-icon]{width:3em;height:3em}
+
+.task-item.is-plan-today{border-color:var(--orange);background:linear-gradient(135deg,var(--paper),var(--orange-pale));box-shadow:0 0 0 3px rgba(224,138,77,0.1)}
+.task-day.is-plan-today{background:var(--orange);color:white}
+.task-starter{font-size:11px;color:var(--orange);margin-top:3px;font-weight:600}
+.if-then-card{background:#eef4f8;border:1px solid var(--blue-soft);border-radius:12px;padding:10px 12px;margin-top:10px;font-size:12px;line-height:1.55}
+.if-then-label{font-weight:700;color:var(--blue);margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.if-then-text{color:var(--ink-soft)}
+.nudge-card{background:#fce8d4;border:1px solid var(--orange-soft);border-radius:14px;padding:12px 14px;margin-bottom:12px;font-size:13px;line-height:1.55;color:var(--ink-soft);display:flex;align-items:flex-start;gap:8px}
+.phase-countdown{margin-top:8px;font-size:13px;color:var(--ink-soft);font-weight:500}
+.cal-day.today-real{outline:2px solid var(--orange);outline-offset:1px}
+.cal-day.selected{outline:2px solid var(--blue);outline-offset:1px}
+.starter-check .task-meta{color:var(--orange)}
+
+</style>
+</head>
+<body>
+
+<header class="topbar">
+ <div class="topbar-left">
+ <span class="emoji"><span data-icon="fire"></span></span><span id="topbar-user">小卷</span>的假期
+ </div>
+ <div class="topbar-right">
+ <div class="streak-pill"><span class="fire"><span data-icon="fire"></span></span><span id="topbar-streak">0</span> 天连签</div>
+ </div>
+</header>
+
+<section class="screen active" id="screen-plan" data-screen="plan">
+ <div class="welcome-card">
+ <h2 id="welcome-title"><span data-icon="leaf"></span> 你的成长计划</h2>
+ <div class="meta">
+ <span id="welcome-range"><span data-icon="calendar"></span> --</span>
+ <span id="welcome-goal"><span data-icon="target"></span> --</span>
+ </div>
+ </div>
+
+ <div class="section-title" id="phase-section-title">阶段路线图</div>
+ <div class="phase-list" id="phase-list"></div>
+
+ <div class="section-title"><span data-icon="checklist"></span> 每日任务 <span class="count" id="task-count">共 0 天</span></div>
+ <div class="task-list" id="task-list"></div>
+</section>
+
+<section class="screen" id="screen-checkin" data-screen="checkin">
+ <div class="day-header">
+ <div class="phase-tag" id="checkin-phase"><span data-icon="sprout"></span> 阶段一：适应期</div>
+ <div class="day-nav">
+  <button class="day-nav-btn" id="day-prev" aria-label="前一天">‹</button>
+  <h2 id="checkin-day">Day 1</h2>
+  <button class="day-nav-btn" id="day-next" aria-label="后一天">›</button>
+ </div>
+ <div class="date" id="checkin-date">--</div>
+ </div>
+
+ <div id="checkin-nudge" class="nudge-card" style="display:none"></div>
+ <div class="section-title"><span data-icon="map-pin"></span> 今日任务</div>
+ <div class="task-card" id="checkin-task-card"></div>
+
+ <div class="section-title"><span data-icon="heart"></span> 健康打卡</div>
+ <div class="health-card">
+ <div class="health-title"><span data-icon="leaf"></span> 记录今天的状态</div>
+ <div class="health-grid">
+ <div class="health-item">
+ <div class="health-label"><span data-icon="walk"></span> 步数</div>
+ <input type="number" class="health-input" id="h-steps" placeholder="0"><span class="health-unit">步</span>
+ </div>
+ <div class="health-item">
+ <div class="health-label"><span data-icon="water-drop"></span> 饮水</div>
+ <input type="number" class="health-input" id="h-water" placeholder="0"><span class="health-unit">杯</span>
+ </div>
+ <div class="health-item">
+ <div class="health-label"><span data-icon="run"></span> 运动</div>
+ <input type="number" class="health-input" id="h-exercise" placeholder="0"><span class="health-unit">min</span>
+ </div>
+ <div class="health-item">
+ <div class="health-label"><span data-icon="moon"></span> 入睡</div>
+ <input type="text" class="health-input" id="h-sleep" placeholder="23:30">
+ </div>
+ </div>
+ </div>
+
+ <div class="section-title">😊 今日心情</div>
+ <div class="mood-card">
+ <div class="mood-options" id="mood-options">
+ <button class="mood-btn" data-mood="😄">😄</button>
+ <button class="mood-btn" data-mood="🙁">🙁</button>
+ <button class="mood-btn" data-mood="😝">😝</button>
+ <button class="mood-btn" data-mood="😭">😭</button>
+ <button class="mood-btn" data-mood="😡">😡</button>
+ </div>
+ </div>
+
+ <div class="section-title"><span data-icon="checklist"></span> 今日笔记（可选）</div>
+ <div class="note-card">
+ <textarea class="note-input" id="checkin-note" placeholder="今天有什么想记录的……"></textarea>
+ </div>
+
+ <button class="checkin-cta" id="checkin-save"><span data-icon="save"></span> 保存今日打卡</button>
+</section>
+
+<section class="screen" id="screen-dashboard" data-screen="dashboard">
+ <div class="dash-hero">
+ <div class="dash-greeting">第 1 阶段进行中</div>
+ <div class="dash-name">小卷，你好 <span data-icon="wave"></span></div>
+ <div class="phase-countdown" id="phase-countdown"></div>
+ <div class="dash-stats">
+ <div class="dash-stat">
+ <div class="num" id="dash-streak">0</div>
+ <div class="label"><span data-icon="fire"></span> 连签天数</div>
+ </div>
+ <div class="dash-stat">
+ <div class="num"><span id="dash-rate">0.0</span><span class="unit">%</span></div>
+ <div class="label"><span data-icon="check-circle"></span> 主线完成率</div>
+ </div>
+ <div class="dash-stat">
+ <div class="num"><span id="dash-day">0</span><span class="unit" id="dash-day-unit">/0</span></div>
+ <div class="label"><span data-icon="calendar"></span> 已用天数</div>
+ </div>
+ </div>
+ </div>
+
+ <div class="section-title"><span data-icon="chart-bar"></span> 关键指标</div>
+ <div class="dash-grid">
+ <div class="dash-card">
+ <div class="dash-card-icon"><span data-icon="target"></span></div>
+ <div class="dash-card-num"><span id="m-main">0.0</span><span class="unit">%</span></div>
+ <div class="dash-card-label">主线任务完成率</div>
+ <div class="progress-bar"><div class="progress-fill" id="m-main-bar" style="width:0%"></div></div>
+ </div>
+ <div class="dash-card">
+ <div class="dash-card-icon"><span data-icon="gift"></span></div>
+ <div class="dash-card-num"><span id="m-elastic">0.0</span><span class="unit">%</span></div>
+ <div class="dash-card-label">弹性任务完成率</div>
+ <div class="progress-bar"><div class="progress-fill" id="m-elastic-bar" style="width:0%;background:var(--blue)"></div></div>
+ </div>
+ <div class="dash-card">
+ <div class="dash-card-icon"><span data-icon="walk"></span></div>
+ <div class="dash-card-num"><span id="m-steps">0</span></div>
+ <div class="dash-card-label">日均步数</div>
+ </div>
+ <div class="dash-card">
+ <div class="dash-card-icon"><span data-icon="water-drop"></span></div>
+ <div class="dash-card-num"><span id="m-water">0</span><span class="unit">杯</span></div>
+ <div class="dash-card-label">日均饮水</div>
+ </div>
+ <div class="dash-card">
+ <div class="dash-card-icon"><span data-icon="run"></span></div>
+ <div class="dash-card-num"><span id="m-exercise">0</span><span class="unit">min</span></div>
+ <div class="dash-card-label">日均运动</div>
+ </div>
+ <div class="dash-card">
+ <div class="dash-card-icon"><span data-icon="moon"></span></div>
+ <div class="dash-card-num" id="m-sleep">--</div>
+ <div class="dash-card-label">平均入睡</div>
+ </div>
+ </div>
+
+ <div class="section-title" id="calendar-section-title"><span data-icon="calendar"></span> 打卡日历</div>
+ <div class="calendar">
+ <div class="cal-header">
+ <div class="cal-title" id="calendar-title">--</div>
+ <div class="cal-legend">
+ <span><i class="done"></i>完成</span>
+ <span><i class="partial"></i>部分</span>
+ <span><i class="miss"></i>未完成</span>
+ </div>
+ </div>
+ <div class="cal-grid" id="cal-grid"></div>
+ </div>
+
+ <div class="section-title"><span data-icon="trending"></span> 健康趋势</div>
+ <div class="health-trend">
+ <div class="trend-title"><span data-icon="walk"></span> 步数趋势（近 7 天）</div>
+ <div class="trend-bars" id="trend-bars"></div>
+ <div class="trend-labels" id="trend-labels"></div>
+ </div>
+</section>
+
+<section class="screen" id="screen-report" data-screen="report">
+ <div class="report-hero">
+ <div class="report-emoji"><span data-icon="trophy"></span></div>
+ <div class="report-title" id="report-title">复盘报告</div>
+ <div class="report-subtitle">每一份坚持，都在悄悄塑造更好的你</div>
+ </div>
+
+ <div class="section-title"><span data-icon="medal"></span>️ 勋章墙</div>
+ <div class="medals-section">
+ <div class="medals-title">已解锁 0 / 8</div>
+ <div class="medals-grid" id="medals-grid"></div>
+ </div>
+
+ <div class="section-title"><span data-icon="chart-bar"></span> 数据汇总</div>
+ <div class="data-summary">
+ <div class="summary-row">
+ <span class="summary-label"><span data-icon="calendar"></span> 总天数</span>
+ <span class="summary-value" id="rep-total-days">0 天</span>
+ </div>
+ <div class="summary-row">
+ <span class="summary-label"><span data-icon="target"></span> 主线完成率</span>
+ <span class="summary-value" id="rep-main-rate">0.0%</span>
+ </div>
+ <div class="summary-row">
+ <span class="summary-label"><span data-icon="fire"></span> 最长连签</span>
+ <span class="summary-value" id="rep-streak">0 天</span>
+ </div>
+ <div class="summary-row">
+ <span class="summary-label"><span data-icon="walk"></span> 总步数</span>
+ <span class="summary-value" id="rep-steps">0 步</span>
+ </div>
+ <div class="summary-row">
+ <span class="summary-label"><span data-icon="run"></span> 总运动时长</span>
+ <span class="summary-value" id="rep-exercise">0 min</span>
+ </div>
+ <div class="summary-row">
+ <span class="summary-label"><span data-icon="water-drop"></span> 总饮水量</span>
+ <span class="summary-value" id="rep-water">0 杯</span>
+ </div>
+ <div class="summary-row">
+ <span class="summary-label">😊 心情最多</span>
+ <span class="summary-value" id="rep-mood">暂无数据</span>
+ </div>
+ </div>
+
+ <div class="section-title"><span data-icon="thought"></span> AI 复盘总结</div>
+ <div class="ai-summary" id="reviews-list"></div>
+ <div class="review-workflow">
+  <p class="review-tip"><span data-icon="alert"></span> <b>复盘工作流</b>：当某阶段结束，点首页「📦 数据交换 → 同步到 HTML」，把 HTML 发回给 Agent，Agent 会针对该阶段生成总结并写回新文件 <code>juanwang-skill-v{时间戳}.html</code>。</p>
+ </div>
+</section>
+
+<nav class="tabbar">
+ <button class="tab active" data-screen="plan">
+ <span class="tab-icon"><span data-icon="calendar"></span></span>
+ <span>规划</span>
+ </button>
+ <button class="tab" data-screen="checkin">
+ <span class="tab-icon"><span data-icon="check-circle"></span></span>
+ <span>打卡</span>
+ </button>
+ <button class="tab" data-screen="dashboard">
+ <span class="tab-icon"><span data-icon="chart-bar"></span></span>
+ <span>仪表盘</span>
+ </button>
+ <button class="tab" data-screen="report">
+ <span class="tab-icon"><span data-icon="trophy"></span></span>
+ <span>复盘</span>
+ </button>
+</nav>
+
+<script>
+/*__APP_DATA_START__*/
+const APP_DATA = {
+  "config": {
+    "user": {
+      "name": "小卷",
+      "duration": 7,
+      "mainGoal": {
+        "category": "卷健康",
+        "subGoal": "规律作息",
+        "specific": "7 天健康重启：恢复作息 + 每天动一动"
+      },
+      "sideGoals": [
+        {
+          "category": "卷学习",
+          "subGoal": "英语四级"
+        }
+      ],
+      "startDate": "2026-06-09",
+      "identityAnchor": "我在练习成为作息稳定、身体有力量的人",
+      "availableDailyMinutes": 90
+    }
+  },
+  "phases": [
+    {
+      "id": 1,
+      "title": "适应期",
+      "icon": "sprout",
+      "range": "Day 1-7",
+      "theme": "建立习惯 + 戒断摆烂",
+      "tip": "今天最重要的事：哪怕只做了 2 分钟启动版也算赢"
+    }
+  ],
+  "dailyTasks": [
+    {
+      "day": 1,
+      "date": "2026-06-09",
+      "phaseId": 1,
+      "mainTask": "穿好运动鞋，慢走 20 min",
+      "starterTask": "穿好鞋，走到楼下",
+      "elasticTask": "背 5 个四级单词（允许放弃）",
+      "ifThenPlan": "如果 22:30 以后才想起任务，就不补完整版，只做 2 分钟启动版并算保留节奏。",
+      "estimatedMinutes": 35,
+      "tip": "今天最重要的事：先启动，再决定要不要继续",
+      "healthTarget": {
+        "steps": 6000,
+        "sleepTarget": "23:30 前入睡",
+        "waterCups": 8,
+        "exerciseMinutes": 20
+      }
+    },
+    {
+      "day": 2,
+      "date": "2026-06-10",
+      "phaseId": 1,
+      "mainTask": "慢走 20 min + 简单拉伸 10 min",
+      "starterTask": "做 1 分钟站立拉伸",
+      "elasticTask": "整理昨天笔记 10 min（允许放弃）",
+      "ifThenPlan": "如果下雨不能出门，就在家原地踏步 2 分钟并喝一杯水。",
+      "estimatedMinutes": 45,
+      "tip": "启动版也算保留节奏，别等完美状态",
+      "healthTarget": {
+        "steps": 6500,
+        "sleepTarget": "23:30 前入睡",
+        "waterCups": 8,
+        "exerciseMinutes": 30
+      }
+    },
+    {
+      "day": 3,
+      "date": "2026-06-11",
+      "phaseId": 1,
+      "mainTask": "慢走 25 min + 健康早餐",
+      "starterTask": "倒一杯水并站立 1 min",
+      "elasticTask": "听 15 min 英语听力（允许放弃）",
+      "ifThenPlan": "如果昨晚熬夜，今天主线减半，只做启动版并 23:30 前躺床。",
+      "estimatedMinutes": 50,
+      "tip": "允许慢一点，但别完全断掉",
+      "healthTarget": {
+        "steps": 7000,
+        "sleepTarget": "23:30 前入睡",
+        "waterCups": 8,
+        "exerciseMinutes": 35
+      }
+    },
+    {
+      "day": 4,
+      "date": "2026-06-12",
+      "phaseId": 1,
+      "mainTask": "慢走 25 min + 核心拉伸 10 min",
+      "starterTask": "铺开瑜伽垫，做 2 个拉伸动作",
+      "elasticTask": "四级阅读 1 篇（允许放弃）",
+      "ifThenPlan": "如果刷手机超过 30 分钟，先把手机放到客厅充电，再做 2 分钟启动版。",
+      "estimatedMinutes": 55,
+      "tip": "小步前进，比一次猛练更可持续",
+      "healthTarget": {
+        "steps": 7500,
+        "sleepTarget": "23:30 前入睡",
+        "waterCups": 8,
+        "exerciseMinutes": 40
+      }
+    },
+    {
+      "day": 5,
+      "date": "2026-06-13",
+      "phaseId": 1,
+      "mainTask": "慢走 30 min + 简单力量 10 min",
+      "starterTask": "做 5 个深蹲",
+      "elasticTask": "吉他按 2 次 C 和弦（允许放弃）",
+      "ifThenPlan": "如果家里临时有事，只做启动版并记录今天发生了什么。",
+      "estimatedMinutes": 55,
+      "tip": "弹性任务可以放弃，启动版尽量保留",
+      "healthTarget": {
+        "steps": 8000,
+        "sleepTarget": "23:30 前入睡",
+        "waterCups": 8,
+        "exerciseMinutes": 40
+      }
+    },
+    {
+      "day": 6,
+      "date": "2026-06-14",
+      "phaseId": 1,
+      "mainTask": "慢走 30 min + 放松拉伸",
+      "starterTask": "打开运动 App，看今日目标",
+      "elasticTask": "散步 15 min（允许放弃）",
+      "ifThenPlan": "如果情绪低落不想动，只做启动版并写一句今天的心情。",
+      "estimatedMinutes": 50,
+      "tip": "高原期很正常，允许自己慢一点",
+      "healthTarget": {
+        "steps": 8200,
+        "sleepTarget": "23:30 前入睡",
+        "waterCups": 8,
+        "exerciseMinutes": 35
+      }
+    },
+    {
+      "day": 7,
+      "date": "2026-06-15",
+      "phaseId": 1,
+      "mainTask": "慢走 30 min + 阶段小复盘 15 min",
+      "starterTask": "写下今天 1 个小进步",
+      "elasticTask": "整理本周打卡记录（允许放弃）",
+      "ifThenPlan": "如果今天想摆烂，至少完成启动版，然后允许今天只算半赢。",
+      "estimatedMinutes": 45,
+      "tip": "适应期收官：你已经证明了能启动",
+      "healthTarget": {
+        "steps": 8500,
+        "sleepTarget": "23:30 前入睡",
+        "waterCups": 8,
+        "exerciseMinutes": 30
+      }
+    }
+  ],
+  "checkins": {},
+  "reviews": {}
+};
+/*__APP_DATA_END__*/
+function computeStateKey() {
+ const user = APP_DATA.config.user || {};
+ const start = user.startDate || 'unknown';
+ const goal = (user.mainGoal && user.mainGoal.specific) || 'plan';
+ let hash = 0;
+ for (let i = 0; i < goal.length; i++) {
+  hash = ((hash << 5) - hash) + goal.charCodeAt(i);
+  hash |= 0;
+ }
+ return 'juanwang_state_v1_' + start + '_' + Math.abs(hash).toString(36);
+}
+const STATE_KEY = computeStateKey();
+let PAGE_HTML_TEMPLATE = null;
+let state = null;
+
+function capturePageTemplate() {
+ if (!PAGE_HTML_TEMPLATE) {
+  PAGE_HTML_TEMPLATE = document.documentElement.outerHTML;
+ }
+ return PAGE_HTML_TEMPLATE;
+}
+
+function getPlanDays() {
+ return APP_DATA.dailyTasks.length;
+}
+
+function parseLocalDate(iso) {
+ const parts = String(iso || '').split('-').map(Number);
+ return new Date(parts[0] || 1970, (parts[1] || 1) - 1, parts[2] || 1);
+}
+
+function formatDateISO(d) {
+ return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+}
+
+function getTodayDay() {
+ const first = APP_DATA.dailyTasks[0];
+ if (!first) return 1;
+ const start = parseLocalDate(first.date);
+ const now = new Date();
+ const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+ const diff = Math.round((today - start) / 86400000);
+ return Math.max(1, Math.min(getPlanDays(), diff + 1));
+}
+
+function getLatestCheckinDay() {
+ let latest = 0;
+ APP_DATA.dailyTasks.forEach(function(t) {
+  const c = state.checkins && state.checkins[t.date];
+  if (c && isCheckinActive(c)) latest = Math.max(latest, t.day);
+ });
+ return latest;
+}
+
+function getProgressDay() {
+ return Math.max(getTodayDay(), getLatestCheckinDay());
+}
+
+function getSelectedDay() {
+ const total = getPlanDays();
+ const day = Number(state && state.selectedDay) || 1;
+ return Math.max(1, Math.min(total, day));
+}
+
+function getTaskByDay(day) {
+ return APP_DATA.dailyTasks[Math.max(1, Math.min(getPlanDays(), day)) - 1];
+}
+
+function getPhaseEndDay(phaseId) {
+ const days = APP_DATA.dailyTasks.filter(function(t){ return t.phaseId === phaseId; }).map(function(t){ return t.day; });
+ return days.length ? Math.max.apply(null, days) : phaseId * 7;
+}
+
+function isCheckinActive(c) {
+ return !!(c && (c.mainDone || c.starterDone));
+}
+
+function mergeReviews(embedded, local) {
+ const merged = Object.assign({}, embedded || {});
+ Object.keys(local || {}).forEach(function(id) {
+  const a = embedded && embedded[id];
+  const b = local[id];
+  if (!b) return;
+  if (!a) { merged[id] = b; return; }
+  const ta = a.generatedAt ? new Date(a.generatedAt).getTime() : 0;
+  const tb = b.generatedAt ? new Date(b.generatedAt).getTime() : 0;
+  merged[id] = tb >= ta ? b : a;
+ });
+ return merged;
+}
+
+function initSelectedDay(storedDay) {
+ const today = getTodayDay();
+ if (typeof storedDay !== 'number') return today;
+ if (storedDay < today) return today;
+ return Math.max(1, Math.min(getPlanDays(), storedDay));
+}
+
+function loadState() {
+ const embeddedCheckins = APP_DATA.checkins || {};
+ const embeddedReviews = APP_DATA.reviews || {};
+ const storedRaw = localStorage.getItem(STATE_KEY);
+ if (storedRaw) {
+  try {
+   const s = JSON.parse(storedRaw);
+   if (!s.checkins || typeof s.checkins !== 'object') s.checkins = {};
+   s.checkins = Object.assign({}, embeddedCheckins, s.checkins);
+   s.selectedDay = initSelectedDay(s.selectedDay);
+   s.reviews = mergeReviews(embeddedReviews, s.reviews || {});
+   return s;
+  } catch(e) {}
+ }
+ return {
+  checkins: Object.assign({}, embeddedCheckins),
+  selectedDay: initSelectedDay(null),
+  reviews: Object.assign({}, embeddedReviews)
+ };
+}
+
+state = loadState();
+capturePageTemplate();
+
+function saveState() {
+ localStorage.setItem(STATE_KEY, JSON.stringify(state));
+}
+
+function formatShortDate(iso) {
+ const d = parseLocalDate(iso);
+ return d.getFullYear() + '.' + (d.getMonth() + 1) + '.' + d.getDate();
+}
+
+function formatCalendarTitle() {
+ const first = APP_DATA.dailyTasks[0];
+ const last = APP_DATA.dailyTasks[APP_DATA.dailyTasks.length - 1];
+ if (!first || !last) return '--';
+ const a = parseLocalDate(first.date);
+ const b = parseLocalDate(last.date);
+ if (a.getFullYear() === b.getFullYear()) {
+  if (a.getMonth() === b.getMonth()) return a.getFullYear() + ' 年 ' + (a.getMonth() + 1) + ' 月';
+  return a.getFullYear() + ' 年 ' + (a.getMonth() + 1) + '-' + (b.getMonth() + 1) + ' 月';
+ }
+ return formatShortDate(first.date) + ' - ' + formatShortDate(last.date);
+}
+
+function getGoalLabel() {
+ const goal = APP_DATA.config.user.mainGoal || {};
+ const sideGoals = APP_DATA.config.user.sideGoals || [];
+ const main = [goal.category, goal.subGoal].filter(Boolean).join('-') || (goal.specific || '假期成长计划');
+ const side = sideGoals.map(function(g){ return g.subGoal || g.category; }).filter(Boolean).join(' + ');
+ return side ? main + '｜副线 ' + side : main;
+}
+
+function getCheckinEntries() {
+ const validDates = new Set(APP_DATA.dailyTasks.map(function(t){ return t.date; }));
+ return Object.keys(state.checkins || {})
+  .filter(function(date){ return validDates.has(date); })
+  .map(function(date){ return [date, state.checkins[date]]; });
+}
+
+function calcCurrentStreak() {
+ const today = getTodayDay();
+ let streak = 0;
+ for (let day = today; day >= 1; day--) {
+  const t = getTaskByDay(day);
+  const c = state.checkins && state.checkins[t.date];
+  if (isCheckinActive(c)) streak++;
+  else break;
+ }
+ return streak;
+}
+
+function calcLongestStreak() {
+ let best = 0;
+ let current = 0;
+ APP_DATA.dailyTasks.forEach(function(t) {
+  const c = state.checkins && state.checkins[t.date];
+  if (isCheckinActive(c)) {
+   current++;
+   best = Math.max(best, current);
+  } else {
+   current = 0;
+  }
+ });
+ return best;
+}
+
+function countConsecutiveMissedBefore(day) {
+ let missed = 0;
+ for (let d = day - 1; d >= 1; d--) {
+  const t = getTaskByDay(d);
+  const c = state.checkins && state.checkins[t.date];
+  if (isCheckinActive(c)) break;
+  missed++;
+ }
+ return missed;
+}
+
+function buildProgressMessage() {
+ const streak = calcCurrentStreak();
+ const entries = getCheckinEntries();
+ const totalExercise = entries.reduce(function(s, pair) {
+  return s + ((pair[1].health && pair[1].health.exerciseMinutes) || 0);
+ }, 0);
+ const starterDays = entries.filter(function(pair) {
+  return pair[1].starterDone && !pair[1].mainDone;
+ }).length;
+ let msg = '已保存！';
+ if (streak > 0) msg += ' 你已连续 ' + streak + ' 天没有完全断掉。';
+ if (totalExercise > 0) msg += ' 累计运动 ' + totalExercise + ' 分钟。';
+ if (starterDays > 0) msg += ' 启动版也在帮你保留节奏。';
+ return msg;
+}
+
+function getCurrentPhaseForDay(day) {
+ const task = getTaskByDay(day);
+ return APP_DATA.phases.find(function(p){ return p.id === task.phaseId; }) || APP_DATA.phases[0];
+}
+
+function getPhaseCountdownText(day) {
+ const phase = getCurrentPhaseForDay(day);
+ const endDay = getPhaseEndDay(phase.id);
+ const remaining = endDay - day;
+ if (remaining <= 0) return phase.title + ' 已进入复盘窗口';
+ return '距离「' + phase.title + '」结束还有 ' + remaining + ' 天';
+}
+
+function setSelectedDay(day, navigateToCheckin) {
+ day = Math.max(1, Math.min(getPlanDays(), day));
+ state.selectedDay = day;
+ saveState();
+ if (navigateToCheckin) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelector('.tab[data-screen="checkin"]').classList.add('active');
+  document.getElementById('screen-checkin').classList.add('active');
+  window.scrollTo(0, 0);
+ }
+ renderPlan();
+ renderCheckin();
+ renderDashboard();
+ renderReport();
+}
+
+document.querySelectorAll('.tab').forEach(tab => {
+ tab.addEventListener('click', () => {
+  const target = tab.dataset.screen;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  tab.classList.add('active');
+  document.querySelector('[data-screen="' + target + '"]').classList.add('active');
+  window.scrollTo(0, 0);
+ });
+});
+
+function renderPlan() {
+ const user = APP_DATA.config.user;
+ const totalDays = getPlanDays();
+ const selectedDay = getSelectedDay();
+ const todayDay = getTodayDay();
+ const progressDay = getProgressDay();
+ const firstTask = APP_DATA.dailyTasks[0];
+ const lastTask = APP_DATA.dailyTasks[APP_DATA.dailyTasks.length - 1];
+ const currentTask = getTaskByDay(progressDay);
+ const currentPhaseId = currentTask ? currentTask.phaseId : 1;
+
+ document.getElementById('topbar-user').textContent = user.name || '小卷';
+ document.getElementById('welcome-title').innerHTML = '<span data-icon="leaf"></span> 你的 ' + totalDays + ' 天成长计划';
+ document.getElementById('welcome-range').innerHTML = '<span data-icon="calendar"></span> ' + formatShortDate(firstTask.date) + ' - ' + formatShortDate(lastTask.date);
+ document.getElementById('welcome-goal').innerHTML = '<span data-icon="target"></span> ' + getGoalLabel();
+ document.getElementById('phase-section-title').textContent = APP_DATA.phases.length + ' 阶段路线图';
+ document.getElementById('task-count').textContent = '共 ' + totalDays + ' 天';
+
+ const phaseList = document.getElementById('phase-list');
+ phaseList.innerHTML = APP_DATA.phases.map(p => {
+  const endDay = getPhaseEndDay(p.id);
+  const isCurrent = p.id === currentPhaseId;
+  const status = isCurrent ? 'current' : (progressDay > endDay ? 'done' : 'todo');
+  const statusText = isCurrent ? '进行中' : (progressDay > endDay ? '已完成' : '未开始');
+  return '<div class="phase-card">' +
+   '<div class="phase-emoji"><span data-icon="' + p.icon + '"></span></div>' +
+   '<div class="phase-body">' +
+   '<div class="phase-title">' + p.title + '</div>' +
+   '<div class="phase-range">' + p.range + ' · ' + p.theme + '</div>' +
+   '</div>' +
+   '<div class="phase-status ' + status + '">' + statusText + '</div>' +
+   '</div>';
+ }).join('');
+
+ const taskList = document.getElementById('task-list');
+ taskList.innerHTML = APP_DATA.dailyTasks.map(t => {
+  const phaseClass = 'p' + (t.phaseId - 1);
+  const isSelected = t.day === selectedDay;
+  const isPlanToday = t.day === todayDay;
+  const phase = APP_DATA.phases.find(function(p){ return p.id === t.phaseId; }) || APP_DATA.phases[0];
+  const dt = parseLocalDate(t.date);
+  const wk = ['日','一','二','三','四','五','六'][dt.getDay()];
+  const dateLabel = t.date + ' · 周' + wk;
+  const starterLine = t.starterTask ? '<div class="task-starter">⚡ ' + t.starterTask + '</div>' : '';
+  let cls = 'task-item';
+  if (isSelected) cls += ' is-selected';
+  if (isPlanToday) cls += ' is-plan-today';
+  return '<div class="' + cls + '" data-day="' + t.day + '">' +
+   '<div class="task-day' + (isPlanToday ? ' is-plan-today' : '') + '">' +
+   'DAY<span class="day-num">' + t.day + '</span></div>' +
+   '<div class="task-content">' +
+   '<div class="task-main">' + t.mainTask + '</div>' +
+   starterLine +
+   '<div class="task-elastic">+ ' + t.elasticTask + '</div>' +
+   '<span class="task-tag tag-phase ' + phaseClass + '"><span data-icon="' + phase.icon + '"></span> ' + phase.title + '</span>' +
+   '<div class="task-date">' + dateLabel + '</div>' +
+   '</div></div>';
+ }).join('');
+ renderIcons();
+}
+
+const listEl = document.getElementById('task-list');
+if (listEl && !listEl.dataset.bound) {
+ listEl.dataset.bound = '1';
+ listEl.addEventListener('click', function(e) {
+  var item = e.target.closest('.task-item');
+  if (item && item.dataset.day) setSelectedDay(parseInt(item.dataset.day), true);
+ });
+}
+
+function renderCheckin() {
+ const dayNum = getSelectedDay();
+ const todayTask = getTaskByDay(dayNum);
+ const phase = APP_DATA.phases.find(function(p){ return p.id === todayTask.phaseId; }) || APP_DATA.phases[0];
+ const phaseNames = ['一','二','三','四','五','六','七','八','九'];
+ document.getElementById('checkin-phase').textContent = '阶段' + (phaseNames[todayTask.phaseId-1] || todayTask.phaseId) + '：' + phase.title;
+ document.getElementById('checkin-day').textContent = 'Day ' + dayNum;
+ const dateObj = parseLocalDate(todayTask.date);
+ const weekday = ['日','一','二','三','四','五','六'][dateObj.getDay()];
+ document.getElementById('checkin-date').textContent = dateObj.getFullYear() + '年' + (dateObj.getMonth()+1) + '月' + dateObj.getDate() + '日 · 周' + weekday;
+ document.getElementById('day-prev').disabled = dayNum <= 1;
+ document.getElementById('day-next').disabled = dayNum >= getPlanDays();
+
+ const nudgeEl = document.getElementById('checkin-nudge');
+ const missed = countConsecutiveMissedBefore(Math.max(dayNum, getTodayDay()));
+ if (nudgeEl) {
+  if (missed >= 3) {
+   nudgeEl.style.display = 'block';
+   nudgeEl.innerHTML = '<span data-icon="alert"></span> 最近 ' + missed + ' 天没打卡了。要不今天只做 2 分钟启动版？启动版也算保留节奏。';
+  } else {
+   nudgeEl.style.display = 'none';
+   nudgeEl.innerHTML = '';
+  }
+ }
+
+ const existing = state.checkins[todayTask.date];
+ let taskHtml = '';
+ if (todayTask.starterTask) {
+  taskHtml += '<label class="task-check starter-check ' + (existing && existing.starterDone ? 'done' : '') + '" id="check-starter">' +
+   '<div class="task-checkbox ' + (existing && existing.starterDone ? 'checked' : '') + '">' + (existing && existing.starterDone ? '✓' : '') + '</div>' +
+   '<div style="flex:1"><div class="task-text">' + todayTask.starterTask + '</div>' +
+   '<div class="task-meta">⚡ 2 分钟启动版 · 低状态也能开始</div></div></label>';
+ }
+ taskHtml += '<label class="task-check ' + (existing && existing.mainDone ? 'done' : '') + '" id="check-main">' +
+  '<div class="task-checkbox ' + (existing && existing.mainDone ? 'checked' : '') + '">' + (existing && existing.mainDone ? '✓' : '') + '</div>' +
+  '<div style="flex:1"><div class="task-text">' + todayTask.mainTask + '</div>' +
+  '<div class="task-meta">📍 主线任务 · 预计 ' + todayTask.estimatedMinutes + ' min</div></div></label>' +
+  '<label class="task-check ' + (existing && existing.elasticDone ? 'done' : '') + '" id="check-elastic" style="margin-top:8px">' +
+  '<div class="task-checkbox ' + (existing && existing.elasticDone ? 'checked' : '') + '">' + (existing && existing.elasticDone ? '✓' : '') + '</div>' +
+  '<div style="flex:1"><div class="task-text">' + todayTask.elasticTask + '</div>' +
+  '<div class="task-meta">🎁 弹性任务 · 允许放弃</div></div></label>';
+ if (todayTask.ifThenPlan) {
+  taskHtml += '<div class="if-then-card"><div class="if-then-label"><span data-icon="lightbulb"></span> If-Then 预案</div><div class="if-then-text">' + todayTask.ifThenPlan + '</div></div>';
+ }
+ taskHtml += '<div class="task-tip">💡 ' + todayTask.tip + '</div>';
+ document.getElementById('checkin-task-card').innerHTML = taskHtml;
+
+ ['check-starter', 'check-main', 'check-elastic'].forEach(function(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.addEventListener('click', function() {
+   const c = state.checkins[todayTask.date] || {};
+   if (id === 'check-starter') c.starterDone = !c.starterDone;
+   if (id === 'check-main') c.mainDone = !c.mainDone;
+   if (id === 'check-elastic') c.elasticDone = !c.elasticDone;
+   state.checkins[todayTask.date] = c;
+   saveState();
+   renderCheckin();
+   renderDashboard();
+   renderReport();
+  });
+ });
+
+ if (existing && existing.health) {
+  document.getElementById('h-steps').value = existing.health.steps || '';
+  document.getElementById('h-water').value = existing.health.waterCups || '';
+  document.getElementById('h-exercise').value = existing.health.exerciseMinutes || '';
+  document.getElementById('h-sleep').value = existing.health.sleepTime || '';
+ } else {
+  document.getElementById('h-steps').value = '';
+  document.getElementById('h-water').value = '';
+  document.getElementById('h-exercise').value = '';
+  document.getElementById('h-sleep').value = '';
+ }
+ document.getElementById('checkin-note').value = (existing && existing.note) || '';
+ document.querySelectorAll('.mood-btn').forEach(btn => {
+  btn.classList.toggle('active', btn.dataset.mood === (existing && existing.mood));
+  btn.onclick = function() {
+   document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('active'));
+   btn.classList.add('active');
+  };
+ });
+ const saveBtn = document.getElementById('checkin-save');
+ saveBtn.classList.toggle('saved', !!existing);
+ saveBtn.innerHTML = existing ? '<span data-icon="save"></span> ✓ 已保存 · 点击更新' : '<span data-icon="save"></span> 保存今日打卡';
+ const prevBtn = document.getElementById('day-prev');
+ const nextBtn = document.getElementById('day-next');
+ if (prevBtn && !prevBtn.dataset.bound) {
+  prevBtn.dataset.bound = '1';
+  prevBtn.addEventListener('click', function() { setSelectedDay(getSelectedDay() - 1); });
+  nextBtn.dataset.bound = '1';
+  nextBtn.addEventListener('click', function() { setSelectedDay(getSelectedDay() + 1); });
+ }
+ renderIcons();
+}
+
+document.getElementById('checkin-save').addEventListener('click', function() {
+ const dayNum = getSelectedDay();
+ const todayTask = getTaskByDay(dayNum);
+ const mainCheck = document.getElementById('check-main');
+ const elasticCheck = document.getElementById('check-elastic');
+ const starterCheck = document.getElementById('check-starter');
+ const mood = document.querySelector('.mood-btn.active');
+ const c = state.checkins[todayTask.date] || {};
+ c.mainDone = mainCheck && mainCheck.classList.contains('done');
+ c.elasticDone = elasticCheck && elasticCheck.classList.contains('done');
+ c.starterDone = starterCheck ? starterCheck.classList.contains('done') : false;
+ c.mood = mood ? mood.dataset.mood : '';
+ c.note = document.getElementById('checkin-note').value.trim();
+ c.health = {
+  steps: parseInt(document.getElementById('h-steps').value) || 0,
+  waterCups: parseInt(document.getElementById('h-water').value) || 0,
+  exerciseMinutes: parseInt(document.getElementById('h-exercise').value) || 0,
+  sleepTime: document.getElementById('h-sleep').value.trim() || ''
+ };
+ state.checkins[todayTask.date] = c;
+ saveState();
+ const btn = document.getElementById('checkin-save');
+ btn.textContent = buildProgressMessage();
+ btn.classList.add('saved');
+ setTimeout(function() {
+  renderCheckin();
+  renderDashboard();
+  renderReport();
+ }, 1200);
+});
+
+function renderDashboard() {
+ const entries = getCheckinEntries();
+ const total = entries.length;
+ const values = entries.map(function(pair){ return pair[1] || {}; });
+ const mainDone = values.filter(function(c){return c.mainDone}).length;
+ const elasticDone = values.filter(function(c){return c.elasticDone}).length;
+ const mainRate = total ? (mainDone / total * 100) : 0;
+ const elasticRate = total ? (elasticDone / total * 100) : 0;
+ const streak = calcCurrentStreak();
+ const totalDays = getPlanDays();
+ const selectedDay = getSelectedDay();
+ const todayDay = getTodayDay();
+ const currentTask = getTaskByDay(todayDay);
+ const currentPhase = APP_DATA.phases.find(function(p){ return p.id === currentTask.phaseId; }) || APP_DATA.phases[0];
+ const avgSteps = total ? Math.round(values.reduce(function(s,c){return s + (c.health && c.health.steps || 0)}, 0) / total) : 0;
+ const avgWater = total ? (values.reduce(function(s,c){return s + (c.health && c.health.waterCups || 0)}, 0) / total).toFixed(1) : '0';
+ const avgExercise = total ? Math.round(values.reduce(function(s,c){return s + (c.health && c.health.exerciseMinutes || 0)}, 0) / total) : 0;
+ const avgSleepTime = (function() {
+  const sleeps = values.map(function(c){return c.health && c.health.sleepTime}).filter(function(s){return s && s.indexOf(':') >= 0});
+  if (!sleeps.length) return '--';
+  const counts = {};
+  sleeps.forEach(function(s){counts[s] = (counts[s] || 0) + 1});
+  const arr = Object.keys(counts).map(function(k){return [k, counts[k]]});
+  arr.sort(function(a,b){return b[1] - a[1]});
+  return arr[0][0];
+ })();
+
+ document.getElementById('topbar-streak').textContent = streak;
+ document.querySelector('.dash-greeting').textContent = '第 ' + currentPhase.id + ' 阶段进行中';
+ document.querySelector('.dash-name').innerHTML = (APP_DATA.config.user.name || '小卷') + '，你好 <span data-icon="wave"></span>';
+ const countdownEl = document.getElementById('phase-countdown');
+ if (countdownEl) countdownEl.textContent = getPhaseCountdownText(todayDay);
+ document.getElementById('dash-streak').textContent = streak;
+ document.getElementById('dash-rate').textContent = mainRate.toFixed(1);
+ document.getElementById('dash-day').textContent = total;
+ document.getElementById('dash-day-unit').textContent = '/' + totalDays;
+ document.getElementById('m-main').textContent = mainRate.toFixed(1);
+ document.getElementById('m-main-bar').style.width = mainRate + '%';
+ document.getElementById('m-elastic').textContent = elasticRate.toFixed(1);
+ document.getElementById('m-elastic-bar').style.width = elasticRate + '%';
+ document.getElementById('m-steps').textContent = avgSteps.toLocaleString();
+ document.getElementById('m-water').textContent = avgWater;
+ document.getElementById('m-exercise').textContent = avgExercise;
+ document.getElementById('m-sleep').textContent = avgSleepTime;
+ document.getElementById('calendar-title').textContent = formatCalendarTitle();
+ document.getElementById('calendar-section-title').innerHTML = '<span data-icon="calendar"></span> ' + totalDays + ' 天打卡日历';
+
+ const calGrid = document.getElementById('cal-grid');
+ calGrid.innerHTML = APP_DATA.dailyTasks.map(function(t) {
+  const c = state.checkins[t.date];
+  let cls = 'miss';
+  if (c) {
+   if (c.mainDone && c.elasticDone) cls = 'done';
+   else if (c.mainDone || c.elasticDone || c.starterDone) cls = 'partial';
+  }
+  const isSelected = t.day === selectedDay;
+  const isPlanToday = t.day === todayDay;
+  let dayCls = 'cal-day ' + cls;
+  if (isSelected) dayCls += ' selected';
+  if (isPlanToday) dayCls += ' today-real';
+  return '<div class="' + dayCls + '" data-day="' + t.day + '" title="Day ' + t.day + ' · 点击查看打卡">' +
+   t.day + (isCheckinActive(c) ? '<span class="check">✓</span>' : '') + '</div>';
+ }).join('');
+ if (calGrid && !calGrid.dataset.bound) {
+  calGrid.dataset.bound = '1';
+  calGrid.addEventListener('click', function(e) {
+   var el = e.target.closest('.cal-day');
+   if (el && el.dataset.day) setSelectedDay(parseInt(el.dataset.day), true);
+  });
+ }
+
+ const trendBars = document.getElementById('trend-bars');
+ const trendLabels = document.getElementById('trend-labels');
+ const startIdx = Math.max(0, todayDay - 7);
+ const last7 = APP_DATA.dailyTasks.slice(startIdx, todayDay).map(function(t) {
+  return { day: t.day, steps: (state.checkins[t.date] && state.checkins[t.date].health && state.checkins[t.date].health.steps) || 0 };
+ });
+ const maxSteps = Math.max.apply(null, last7.map(function(d){return d.steps}).concat([10000]));
+ trendBars.innerHTML = last7.map(function(d) {
+  const h = d.steps ? (d.steps / maxSteps * 100) : 4;
+  return '<div class="trend-bar" style="height:' + h + '%"><span class="val">' + (d.steps ? (d.steps/1000).toFixed(1) + 'k' : '-') + '</span></div>';
+ }).join('');
+ trendLabels.innerHTML = last7.map(function(d){return '<span>Day ' + d.day + '</span>'}).join('');
+ renderIcons();
+}
+
+function renderReport() {
+ const entries = getCheckinEntries();
+ const total = entries.length;
+ const values = entries.map(function(pair){ return pair[1] || {}; });
+ const mainDone = values.filter(function(c){return c.mainDone}).length;
+ const mainRate = total ? (mainDone / total * 100).toFixed(1) : '0.0';
+ const totalSteps = values.reduce(function(s,c){return s + (c.health && c.health.steps || 0)}, 0);
+ const totalExercise = values.reduce(function(s,c){return s + (c.health && c.health.exerciseMinutes || 0)}, 0);
+ const totalWater = values.reduce(function(s,c){return s + (c.health && c.health.waterCups || 0)}, 0);
+ const longestStreak = calcLongestStreak();
+ const totalDays = getPlanDays();
+ document.getElementById('report-title').textContent = totalDays + ' 天复盘报告';
+ document.getElementById('rep-total-days').textContent = totalDays + ' 天';
+ document.getElementById('rep-main-rate').textContent = mainRate + '%';
+ document.getElementById('rep-streak').textContent = longestStreak + ' 天';
+ document.getElementById('rep-steps').textContent = totalSteps.toLocaleString() + ' 步';
+ document.getElementById('rep-exercise').textContent = totalExercise + ' min';
+ document.getElementById('rep-water').textContent = totalWater + ' 杯';
+ const moodCounts = {};
+ values.forEach(function(c){ if (c.mood) moodCounts[c.mood] = (moodCounts[c.mood] || 0) + 1; });
+ const moodItems = Object.keys(moodCounts).map(function(m){ return [m, moodCounts[m]]; }).sort(function(a,b){ return b[1] - a[1]; });
+ document.getElementById('rep-mood').textContent = moodItems.length ? (moodItems[0][0] + ' · ' + Math.round(moodItems[0][1] / total * 100) + '%') : '暂无数据';
+ // 只展示当前计划时长可能解锁的勋章，避免 30 天计划里挂着永远锁死的 90 天勋章
+ const medals = [
+  {icon:'sprout', name:'7天破冰', minDays: 7, unlocked: total >= 7},
+  {icon:'fire', name:'7天连签', minDays: 7, unlocked: longestStreak >= 7},
+  {icon:'trophy', name:'30天稳定记录', minDays: 30, unlocked: total >= 30 && Number(mainRate) >= 70},
+  {icon:'target', name:'45天持续行动', minDays: 45, unlocked: total >= 45},
+  {icon:'palette', name:'60天兴趣养成', minDays: 60, unlocked: total >= 60},
+  {icon:'crown', name:'90天长期主义', minDays: 90, unlocked: total >= 90},
+  {icon:'leaf', name:'健康重启', minDays: 30, unlocked: total >= 30 && totalSteps >= 200000},
+  {icon:'moon', name:'规律作息勋章', minDays: 7, unlocked: values.filter(function(c){return c.health && c.health.sleepTime}).length >= 7}
+ ].filter(function(m){ return m.minDays <= totalDays; });
+ const unlockedCount = medals.filter(function(m){return m.unlocked}).length;
+ document.querySelector('.medals-title').textContent = '已解锁 ' + unlockedCount + ' / ' + medals.length;
+ document.getElementById('medals-grid').innerHTML = medals.map(function(m) {
+  return '<div class="medal ' + (m.unlocked ? 'unlocked' : 'locked') + '">' +
+   '<div class="medal-emoji"><span data-icon="' + m.icon + '"></span></div>' +
+   '<div class="medal-name">' + m.name + '</div></div>';
+ }).join('');
+ renderPhaseReviews();
+}
+
+function renderPhaseReviews() {
+ const list = document.getElementById('reviews-list');
+ if (!list) return;
+ const reviews = state.reviews || {};
+ const progressDay = getProgressDay();
+ const phaseNames = ['一','二','三','四','五','六','七','八','九'];
+ list.innerHTML = APP_DATA.phases.map(function(p) {
+  const endDay = getPhaseEndDay(p.id);
+  const review = reviews[p.id];
+  const isReady = progressDay >= endDay;
+  const isDone = !!review;
+  let status = 'pending';
+  let statusText = '未到阶段末';
+  if (isReady && isDone) { status = 'done'; statusText = '✓ 已复盘'; }
+  else if (isReady && !isDone) { status = 'ready'; statusText = '📩 找 Agent 复盘'; }
+  let body;
+  if (isDone) {
+   body = '<div class="review-card-body">' + review.text + '</div>' +
+    '<div class="review-meta"><span>生成于 ' + new Date(review.generatedAt).toLocaleString('zh-CN', {hour12: false}) + '</span>' +
+    '<span class="version">' + (review.version || 'v?') + '</span></div>';
+  } else if (isReady) {
+   body = '<div class="review-card-body"><p style="color:var(--ink-light);font-style:italic">该阶段已结束（Day ' + endDay + '），但 Agent 还没生成该阶段复盘。</p><p>点首页「📦 数据交换 → 同步到 HTML」把当前文件发回 Agent，Agent 会针对 <b>' + p.title + '</b> 阶段生成总结并写回新文件。</p></div>';
+  } else {
+   body = '<div class="review-card-body"><p style="color:var(--ink-light);font-style:italic">该阶段进行中（' + p.range + '），阶段结束（Day ' + endDay + '）后会自动提示可复盘。</p></div>';
+  }
+  return '<div class="review-card"><div class="review-card-head"><span class="phase-dot"></span>' +
+   '<span class="phase-name">阶段' + (phaseNames[p.id-1] || p.id) + ' · ' + p.title + ' <span style="color:var(--ink-light);font-weight:400;font-size:12px">(' + p.range + ')</span></span>' +
+   '<span class="review-status ' + status + '">' + statusText + '</span></div>' + body + '</div>';
+ }).join('');
+ renderIcons();
+}
+
+renderPlan();
+renderCheckin();
+renderDashboard();
+renderReport();
+
+function getDataSummary() {
+ const checkinCount = Object.keys(state.checkins || {}).length;
+ const totalDays = APP_DATA.dailyTasks.length;
+ return {
+  user: APP_DATA.config.user.name,
+  duration: APP_DATA.config.user.duration,
+  mainGoal: APP_DATA.config.user.mainGoal,
+  checkinCount: checkinCount,
+  totalDays: totalDays,
+  lastUpdate: new Date().toISOString(),
+  storageBytes: (localStorage.getItem(STATE_KEY) || '').length
+ };
+}
+
+function buildSyncedHtml(syncData) {
+ const template = capturePageTemplate();
+ const now = new Date();
+ const ts = now.getFullYear() + '' + String(now.getMonth()+1).padStart(2,'0') + String(now.getDate()).padStart(2,'0') + '-' + String(now.getHours()).padStart(2,'0') + String(now.getMinutes()).padStart(2,'0');
+ // JSON 中的 "</" 必须转义为 "<\/"，否则用户备注里出现 </script> 会提前终止脚本标签
+ const appJson = JSON.stringify(syncData, null, 2).replace(/<\//g, '<\\/');
+ const appBlock = '/*__APP_DATA_START__*/\nconst APP_DATA = ' + appJson + ';\n/*__APP_DATA_END__*/';
+ // 用函数替换，避免用户笔记中的 $& 等字符被当作替换模式展开
+ let newHtml = template.replace(/\/\*__APP_DATA_START__\*\/[\s\S]*?\/\*__APP_DATA_END__\*\//, function() { return appBlock; });
+ newHtml = newHtml.replace(/<meta name="generated-at" content="[^"]*">/, function() { return '<meta name="generated-at" content="' + now.toISOString() + '">'; });
+ newHtml = newHtml.replace(/<title>([^<]*?)(?: · v[\d-]+)?<\/title>/, function(_, base) { return '<title>' + base + ' · v' + ts + '</title>'; });
+ // outerHTML 不含 DOCTYPE，补上以避免新文件进入怪异模式
+ if (!/^<!DOCTYPE/i.test(newHtml)) newHtml = '<!DOCTYPE html>\n' + newHtml;
+ return { html: newHtml, ts: ts };
+}
+
+function showDataPanel() {
+ const existing = document.getElementById('data-panel');
+ if (existing) { existing.remove(); return; }
+ const summary = getDataSummary();
+ const panel = document.createElement('div');
+ panel.id = 'data-panel';
+ panel.style.cssText = 'position:fixed;inset:0;z-index:200;background:rgba(58,51,40,0.6);backdrop-filter:blur(8px);display:flex;align-items:flex-end;justify-content:center;padding:0;font-family:inherit;';
+ panel.innerHTML = '<div style="background:var(--paper);border-radius:20px 20px 0 0;width:100%;max-width:500px;padding:20px 16px calc(20px + env(safe-area-inset-bottom));max-height:85vh;overflow-y:auto;">' +
+  '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;"><h3 style="margin:0;font-size:17px;font-weight:700">📦 数据交换</h3>' +
+  '<button id="dp-close" style="background:var(--line);border:none;border-radius:50%;width:32px;height:32px;font-size:18px;cursor:pointer">×</button></div>' +
+  '<div style="background:var(--bg);border-radius:12px;padding:12px;margin-bottom:14px;font-size:13px;line-height:1.7"><div>👤 ' + summary.user + ' · ' + summary.duration + '天计划 · ' + summary.checkinCount + '/' + summary.totalDays + '天已打卡</div>' +
+  '<div style="color:var(--ink-light);font-size:11px;margin-top:4px">📊 localStorage 使用 ' + (summary.storageBytes/1024).toFixed(1) + ' KB</div></div>' +
+  '<button id="dp-export" style="width:100%;padding:14px;margin-bottom:10px;background:var(--blue);color:white;border:none;border-radius:12px;font-weight:600;font-size:14px;cursor:pointer">📥 导出计划数据为 JSON<div style="font-size:11px;opacity:0.85;font-weight:normal;margin-top:2px">下载独立 JSON 文件（可附邮件发回给 Agent）</div></button>' +
+  '<button id="dp-sync" style="width:100%;padding:14px;margin-bottom:10px;background:var(--orange);color:white;border:none;border-radius:12px;font-weight:600;font-size:14px;cursor:pointer">🔄 同步到当前 HTML 文件<div style="font-size:11px;opacity:0.85;font-weight:normal;margin-top:2px">生成包含所有打卡数据的 HTML（推荐：发回给 Agent）</div></button>' +
+  '<label id="dp-import-btn" style="display:block;width:100%;padding:14px;margin-bottom:10px;background:var(--green);color:white;border-radius:12px;font-weight:600;font-size:14px;cursor:pointer;text-align:center">📤 从 JSON 文件导入历史数据<div style="font-size:11px;opacity:0.85;font-weight:normal;margin-top:2px">用之前导出的 JSON 恢复（跨设备同步）</div><input type="file" id="dp-import-file" accept=".json" style="display:none"></label>' +
+  '<div style="background:#fce8d4;border-radius:10px;padding:10px 12px;font-size:12px;line-height:1.6;color:var(--ink-soft);margin-top:6px">💡 <b>建议工作流</b>：每完成一阶段 / 计划结束时，点「同步到 HTML」，把含数据的 HTML 发回给 Agent 复盘。</div></div>';
+ document.body.appendChild(panel);
+ document.getElementById('dp-close').onclick = () => panel.remove();
+ panel.onclick = (e) => { if (e.target === panel) panel.remove(); };
+ document.getElementById('dp-export').onclick = () => {
+  const exportData = { meta: { source: 'juanwang-skill', version: '1.3.0', exportedAt: new Date().toISOString() }, config: APP_DATA.config, phases: APP_DATA.phases, dailyTasks: APP_DATA.dailyTasks, checkins: state.checkins, reviews: state.reviews || {} };
+  const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'juanwang_' + summary.user + '_' + new Date().toISOString().slice(0,10) + '.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  alert('✅ 已导出 JSON！\n\n文件名：' + a.download);
+ };
+ document.getElementById('dp-import-file').onchange = async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  try {
+   const data = JSON.parse(await file.text());
+   if (!data.checkins) { alert('❌ 文件格式不对：找不到 checkins 字段'); return; }
+   const oldCount = Object.keys(state.checkins || {}).length;
+   const newCount = Object.keys(data.checkins).length;
+   if (confirm('📥 准备导入：\n\n当前：' + oldCount + ' 天打卡\n文件中：' + newCount + ' 天打卡\n\n⚠️ 导入会覆盖当前数据，是否继续？')) {
+    state.checkins = data.checkins || {};
+    if (data.reviews && typeof data.reviews === 'object') state.reviews = mergeReviews(APP_DATA.reviews || {}, data.reviews);
+    saveState();
+    renderPlan(); renderCheckin(); renderDashboard(); renderReport();
+    panel.remove();
+    alert('✅ 导入成功！\n\n已加载 ' + newCount + ' 天打卡数据。');
+   }
+  } catch (err) { alert('❌ 导入失败：' + err.message); }
+ };
+ document.getElementById('dp-sync').onclick = () => {
+  const progressDay = getProgressDay();
+  const reviews = state.reviews || {};
+  const pendingPhases = APP_DATA.phases.filter(function(p) {
+   return progressDay >= getPhaseEndDay(p.id) && !reviews[p.id];
+  });
+  const confirmMsg = pendingPhases.length > 0
+   ? '🔄 同步到 HTML 会重新生成当前文件。\n\n✅ 含完整打卡数据\n✅ 可直接发回给 Agent 复盘\n\n💡 检测到 ' + pendingPhases.length + ' 个阶段等待复盘：' + pendingPhases.map(function(p){return p.title;}).join('、') + '\n\n是否继续？'
+   : '🔄 同步到 HTML 会重新生成当前文件。\n\n✅ 含完整打卡数据\n✅ 可直接发回给 Agent 复盘\n\n是否继续？';
+  if (!confirm(confirmMsg)) return;
+  const syncData = { config: APP_DATA.config, phases: APP_DATA.phases, dailyTasks: APP_DATA.dailyTasks, checkins: state.checkins, reviews: state.reviews || {} };
+  try {
+   const built = buildSyncedHtml(syncData);
+   const blob = new Blob([built.html], { type: 'text/html' });
+   const url = URL.createObjectURL(blob);
+   const a = document.createElement('a');
+   a.href = url;
+   a.download = 'juanwang-skill-v' + built.ts + '.html';
+   a.click();
+   URL.revokeObjectURL(url);
+   const pendingMsg = pendingPhases.length > 0 ? '\n\n📌 等待 Agent 复盘的阶段：' + pendingPhases.map(function(p){return p.title;}).join('、') : '';
+   alert('✅ 同步完成！\n\n文件名：' + a.download + pendingMsg);
+  } catch (err) {
+   alert('❌ 同步失败：' + err.message + '\n\n请改用「导出 JSON」发回给 Agent。');
+  }
+ };
+}
+
+const dataBtn = document.createElement('button');
+dataBtn.id = 'data-btn';
+dataBtn.title = '数据交换';
+dataBtn.style.cssText = 'background:transparent;border:none;cursor:pointer;font-size:16px;padding:4px 8px;line-height:1';
+dataBtn.innerHTML = '📦';
+dataBtn.onclick = showDataPanel;
+document.querySelector('.topbar-right').insertBefore(dataBtn, document.querySelector('.topbar-right').firstChild);
+renderIcons();
+</script>
+</body>
+</html>
