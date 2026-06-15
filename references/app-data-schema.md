@@ -12,6 +12,9 @@ Required top-level fields:
 ```json
 {
   "config": {
+    "output": {
+      "fileNameBase": "juanwang-小卷-英语运动-2026-07-01"
+    },
     "user": {
       "name": "小卷",
       "duration": 30,
@@ -35,6 +38,8 @@ Required top-level fields:
 }
 ```
 
+`config.output.fileNameBase` is optional for backward compatibility and must not include `.html`. For new plans, set it from the safe filename base used for delivery. Prefer user-requested filenames when provided; otherwise use `juanwang-{nickname}-{goal-keyword}-{startDate}`. If omitted in older files, runtime falls back to `config.user.name`, `config.user.mainGoal`, and `config.user.startDate`.
+
 Required `phase` fields:
 - `id`: number, stable phase id starting at 1
 - `title`: Chinese phase name
@@ -43,7 +48,7 @@ Required `phase` fields:
 - `theme`: phase theme
 - `tip`: warm phase-level prompt
 
-Optional `config.user` methodology fields such as `identityAnchor`, `availableDailyMinutes`, `realisticDailyMinutes`, or `riskScenarios` may be included when useful. The runtime must not depend on them.
+Optional `config.user` methodology fields such as `identityAnchor`, `availableDailyMinutes`, `realisticDailyMinutes`, or `riskScenarios` may be included when useful. `config.user.name` should use the user's preferred nickname/name when provided, otherwise `小卷`; nickname is not a hard gate. The runtime must not depend on methodology fields.
 
 Required `dailyTasks[]` fields:
 - `day`: 1-based day number

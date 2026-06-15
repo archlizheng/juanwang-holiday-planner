@@ -9,7 +9,7 @@
 - Parents may configure plans, but the plan should serve the learner's autonomy
 
 **Core deliverable**:
-- One file: `juanwang-skill.html`
+- One `.html` file with a personalized safe filename. Default format: `juanwang-{nickname}-{goal-keyword}-{startDate}.html`; if the user explicitly requests a filename, sanitize it and add `.html` if needed.
 - The file contains CSS, JS, `APP_DATA`, check-in UI, dashboard, and data exchange UI
 - Users can double-click it on desktop or send it to a phone and open it with a browser
 - Do not generate zip files, preview screenshots, QR codes, `manifest.json`, or `sw.js`

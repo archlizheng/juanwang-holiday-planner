@@ -46,6 +46,8 @@ for (const word of banned) {
 const requiredRuntime = [
   'function getTodayDay',
   'function computeStateKey',
+  'function sanitizeFileNameBase',
+  'function getFileNameBase',
   'starterTask',
   'ifThenPlan',
   'buildSyncedHtml',
@@ -81,6 +83,9 @@ if (!Array.isArray(data.dailyTasks) || !data.dailyTasks.length) fail('dailyTasks
 
 const startDate = data.config.user.startDate;
 const duration = data.config.user.duration;
+if (data.config.output?.fileNameBase != null) {
+  validateFileNameBase(data.config.output.fileNameBase);
+}
 if (data.dailyTasks.length !== duration) {
   warn(`dailyTasks 数量 (${data.dailyTasks.length}) 与 duration (${duration}) 不一致`);
 }
@@ -131,6 +136,16 @@ function addDays(iso, offset) {
   const dt = new Date(y, m - 1, d);
   dt.setDate(dt.getDate() + offset);
   return `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`;
+}
+
+function validateFileNameBase(value) {
+  if (typeof value !== 'string' || !value.trim()) {
+    fail('config.output.fileNameBase 应为非空字符串');
+    return;
+  }
+  if (/\.html$/i.test(value)) fail('config.output.fileNameBase 不应包含 .html 后缀');
+  if (/[\/\\:*?"<>|]/.test(value)) fail(`config.output.fileNameBase 含危险文件名字符: ${value}`);
+  if (value.length > 80) warn(`config.output.fileNameBase 超过 80 字符: ${value.length}`);
 }
 
 function report() {

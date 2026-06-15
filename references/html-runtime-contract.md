@@ -13,6 +13,7 @@ The HTML template must remain a self-contained browser file.
 - `/*__APP_DATA_START__*/` … `/*__APP_DATA_END__*/` boundary markers around `const APP_DATA = ...;`
 - `const STATE_KEY = computeStateKey();` with per-plan fingerprint (`startDate` + goal hash)
 - data exchange UI for export JSON, sync to HTML, and import JSON (sync must work on `file://` without fetch)
+- `getFileNameBase()` that uses `config.output.fileNameBase` first and falls back to nickname, goal keyword, and start date; JSON export and sync-to-HTML download must use this same base
 - check-in UI renders `starterTask` (stores `starterDone`) and `ifThenPlan`
 - mood buttons for exactly `😄`, `🙁`, `😝`, `😭`, `😡`
 - `getTodayDay()` auto-aligns selected day; phase review readiness uses progress day, not manual selected day

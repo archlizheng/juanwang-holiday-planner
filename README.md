@@ -6,25 +6,42 @@
 
 ---
 
+## 在线预览
+
+想先看生成效果，可以打开这份示例网页：[卷王·假期成长规划示例](https://archlizheng.github.io/juanwang-holiday-plan-2026/)。
+
+这是一份 60 天计划的实际生成页面，用来预览「规划 / 打卡 / 仪表盘 / 复盘」等核心交互；正式使用时，Skill 会根据你的开始日期、目标和可用时间生成新的个性化单文件 HTML。
+
+<p>
+  <img src="./assets/preview-plan.png" alt="规划页预览：阶段路线图和每日任务" width="220">
+  <img src="./assets/preview-checkin.png" alt="打卡页预览：今日任务、健康打卡和心情记录" width="220">
+  <img src="./assets/preview-dashboard.png" alt="仪表盘预览：关键指标和 60 天打卡日历" width="220">
+  <img src="./assets/preview-report.png" alt="复盘页预览：勋章墙、数据汇总和 AI 复盘总结" width="220">
+</p>
+
+---
+
 ## 快速开始
 
-你 **不需要会写代码**。装好 Skill 后，在对话里说明假期目标并 **必须提供开始日期**；AI 会按本仓库规则生成 `juanwang-skill.html`，双击即可在浏览器打开（手机也可传文件后用浏览器打开）。
+你 **不需要会写代码**。装好 Skill 后，在对话里说明假期目标并 **必须提供开始日期**；AI 会按本仓库规则生成一个个性化命名的单文件 HTML，双击即可在浏览器打开（手机也可传文件后用浏览器打开）。
 
 ### 路径 A：已安装 Skill
 
 1. **新开一次 AI 对话**（让 Skill 生效）。
 2. **复制下面模板，改成你的信息**，发送给 AI。
-3. 等待生成 **单个 HTML 文件** `juanwang-skill.html`。
+3. 等待生成 **单个 HTML 文件**，默认文件名类似 `juanwang-小卷-英语运动-2026-07-01.html`。
 
 ```text
 /juanwang-holiday-planner 帮我做一份暑假成长规划
 
 开始日期: 2026-07-01
 假期长度: 45 天
+昵称: 小周（可选）
 主要方向: 英语 + 运动恢复节奏
 具体目标: 每天背 20 个四级词，每周跑 2 次
 副目标: 读完一本非虚构书（可选）
 每天可用时间: 约 2 小时
+期望文件名: 小周暑假英语运动计划（可选）
 ```
 
 触发方式因环境而异：优先用 **`/juanwang-holiday-planner`**；若未注册斜杠命令，可在对话里说明「请严格按 `juanwang-holiday-planner` skill 生成单文件 HTML 计划」，或用 **`@`** 引用已安装目录下的 `SKILL.md`。
@@ -106,7 +123,7 @@ npx skills install archlizheng/juanwang-holiday-planner --list
 
 ## 你会得到什么
 
-生成物是 **一个 HTML 文件** `juanwang-skill.html`，内含：
+生成物是 **一个 HTML 文件**，默认会按昵称、目标和开始日期生成安全文件名；如果你提供「期望文件名」，Skill 会清理危险字符并自动补上 `.html` 后缀。文件内含：
 
 | 模块 | 说明 |
 |------|------|
@@ -127,7 +144,7 @@ npx skills install archlizheng/juanwang-holiday-planner --list
 |------|----------|
 | 调整未来任务 / 减负 | 「我落后了，帮我把后面 7 天的任务减载，保留已打卡记录」 |
 | 阶段复盘 | 「根据我同步出来的 HTML，写第 1 阶段复盘并写回文件」 |
-| 校验产物 | 「帮我检查这份 juanwang-skill.html 是否符合 skill 规范」 |
+| 校验产物 | 「帮我检查这份 HTML 是否符合 skill 规范」 |
 
 ---
 
@@ -137,9 +154,11 @@ npx skills install archlizheng/juanwang-holiday-planner --list
 |------|--------|
 | 开始日期 | **必填**，`YYYY-MM-DD`，例如 `2026-07-01` |
 | 假期长度 | 天数，例如 `45` |
+| 昵称 / 称呼 | 可选；用于页面称呼和默认文件名，未提供时用「小卷」 |
 | 主要方向 | 一句话概括，例如「英语 + 运动」 |
 | 具体目标 | 可衡量的主目标 |
 | 副目标 | 最多 2 个，可选 |
+| 期望文件名 | 可选；不需要写 `.html`，Skill 会自动清理危险字符 |
 | 每天可用时间 | 可选；Skill 会按 70%–80% 留 buffer |
 | 身份锚点 / 高风险场景 | 可选；用于生成 If-Then 预案 |
 

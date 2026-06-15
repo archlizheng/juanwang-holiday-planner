@@ -847,6 +847,9 @@ input,select,textarea{font-family:inherit;font-size:inherit;color:inherit}
 /*__APP_DATA_START__*/
 const APP_DATA = {
   "config": {
+    "output": {
+      "fileNameBase": "juanwang-小卷-规律作息-2026-06-09"
+    },
     "user": {
       "name": "小卷",
       "duration": 7,
@@ -1151,6 +1154,34 @@ function getGoalLabel() {
  const main = [goal.category, goal.subGoal].filter(Boolean).join('-') || (goal.specific || '假期成长计划');
  const side = sideGoals.map(function(g){ return g.subGoal || g.category; }).filter(Boolean).join(' + ');
  return side ? main + '｜副线 ' + side : main;
+}
+
+function sanitizeFileNameBase(input) {
+ let base = String(input || '').replace(/\.html$/i, '');
+ base = base.replace(/[\/\\:*?"<>|]+/g, '-');
+ base = base.replace(/[^\u4e00-\u9fa5A-Za-z0-9_-]+/g, '-');
+ base = base.replace(/-+/g, '-').replace(/^-+|-+$/g, '');
+ base = base.slice(0, 80).replace(/-+$/g, '');
+ return base || 'juanwang-plan';
+}
+
+function getDisplayName() {
+ const user = APP_DATA.config.user || {};
+ const name = String(user.name || '').trim();
+ return name || '小卷';
+}
+
+function getGoalFileKeyword() {
+ const user = APP_DATA.config.user || {};
+ const goal = user.mainGoal || {};
+ return sanitizeFileNameBase(goal.subGoal || goal.specific || goal.category || '假期成长');
+}
+
+function getFileNameBase() {
+ const output = (APP_DATA.config && APP_DATA.config.output) || {};
+ if (output.fileNameBase) return sanitizeFileNameBase(output.fileNameBase);
+ const user = APP_DATA.config.user || {};
+ return sanitizeFileNameBase(['juanwang', getDisplayName(), getGoalFileKeyword(), user.startDate || 'plan'].join('-'));
 }
 
 function getCheckinEntries() {
@@ -1622,9 +1653,10 @@ function getDataSummary() {
  const checkinCount = Object.keys(state.checkins || {}).length;
  const totalDays = APP_DATA.dailyTasks.length;
  return {
-  user: APP_DATA.config.user.name,
+  user: getDisplayName(),
   duration: APP_DATA.config.user.duration,
   mainGoal: APP_DATA.config.user.mainGoal,
+  fileNameBase: getFileNameBase(),
   checkinCount: checkinCount,
   totalDays: totalDays,
   lastUpdate: new Date().toISOString(),
@@ -1673,7 +1705,7 @@ function showDataPanel() {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'juanwang_' + summary.user + '_' + new Date().toISOString().slice(0,10) + '.json';
+  a.download = summary.fileNameBase + '-' + new Date().toISOString().slice(0,10) + '.json';
   a.click();
   URL.revokeObjectURL(url);
   alert('✅ 已导出 JSON！\n\n文件名：' + a.download);
@@ -1713,7 +1745,7 @@ function showDataPanel() {
    const url = URL.createObjectURL(blob);
    const a = document.createElement('a');
    a.href = url;
-   a.download = 'juanwang-skill-v' + built.ts + '.html';
+   a.download = getFileNameBase() + '-v' + built.ts + '.html';
    a.click();
    URL.revokeObjectURL(url);
    const pendingMsg = pendingPhases.length > 0 ? '\n\n📌 等待 Agent 复盘的阶段：' + pendingPhases.map(function(p){return p.title;}).join('、') : '';

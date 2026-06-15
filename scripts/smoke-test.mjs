@@ -41,7 +41,10 @@ function addDays(iso, offset) {
 
 const START = '2026-06-09';
 const APP_DATA = {
-  config: { user: { name: '测试', duration: 7, mainGoal: { specific: '测试目标' }, startDate: START } },
+  config: {
+    output: { fileNameBase: 'juanwang-测试-测试目标-2026-06-09' },
+    user: { name: '测试', duration: 7, mainGoal: { subGoal: '测试目标', specific: '测试目标' }, startDate: START }
+  },
   phases: [{ id: 1, title: '适应期', icon: 'sprout', range: 'Day 1-7', theme: '测试', tip: '测试' }],
   dailyTasks: Array.from({ length: 7 }, function (_, i) {
     return {
@@ -65,6 +68,7 @@ const APP_DATA = {
 const FUNC_NAMES = [
   'parseLocalDate', 'getPlanDays', 'getTodayDay', 'getLatestCheckinDay',
   'getProgressDay', 'getSelectedDay', 'getTaskByDay', 'getPhaseEndDay',
+  'sanitizeFileNameBase', 'getDisplayName', 'getGoalFileKeyword', 'getFileNameBase',
   'isCheckinActive', 'mergeReviews', 'initSelectedDay',
   'calcCurrentStreak', 'calcLongestStreak', 'countConsecutiveMissedBefore'
 ];
@@ -84,7 +88,7 @@ if (errors.length) {
   process.exit(1);
 }
 
-function makeContext(fixedNowISO, checkins) {
+function makeContext(fixedNowISO, checkins, appData = APP_DATA) {
   const ctx = createContext({});
   const setup = `
 const __FIXED_NOW__ = ${JSON.stringify(fixedNowISO)};
@@ -94,7 +98,7 @@ Date = class extends RealDate {
     if (args.length === 0) { super(__FIXED_NOW__); } else { super(...args); }
   }
 };
-const APP_DATA = ${JSON.stringify(APP_DATA)};
+const APP_DATA = ${JSON.stringify(appData)};
 let state = { checkins: ${JSON.stringify(checkins)}, selectedDay: 1, reviews: {} };
 ${extracted.join('\n')}
 `;
@@ -181,9 +185,27 @@ ${extracted.join('\n')}
   if (missed !== 3) fail(`Day 4 前应有 3 天未打卡，实际 ${missed}`);
 }
 
+// Test 11: config.output.fileNameBase 优先，且去掉危险字符和重复后缀
+{
+  const appData = structuredClone(APP_DATA);
+  appData.config.output.fileNameBase = '暑假/英语:计划.html';
+  const ctx = makeContext('2026-06-09T10:00:00', {}, appData);
+  const name = runInContext('getFileNameBase()', ctx);
+  if (name !== '暑假-英语-计划') fail(`fileNameBase 安全化失败，实际 ${name}`);
+}
+
+// Test 12: 旧 HTML 没有 config.output 时自动 fallback
+{
+  const appData = structuredClone(APP_DATA);
+  delete appData.config.output;
+  const ctx = makeContext('2026-06-09T10:00:00', {}, appData);
+  const name = runInContext('getFileNameBase()', ctx);
+  if (name !== 'juanwang-测试-测试目标-2026-06-09') fail(`旧数据 fallback 文件名错误，实际 ${name}`);
+}
+
 if (errors.length) {
   console.error('❌ 冒烟测试失败');
   errors.forEach((e) => console.error('  -', e));
   process.exit(1);
 }
-console.log('✅ 冒烟测试通过（10 项，运行模板真实函数源码 + 合成测试数据）');
+console.log('✅ 冒烟测试通过（12 项，运行模板真实函数源码 + 合成测试数据）');

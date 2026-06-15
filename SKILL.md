@@ -10,8 +10,9 @@ The product voice is Chinese-first and warm: it helps users stop vague flag-sett
 </objective>
 
 <essential_principles>
-- **Single HTML is the deliverable**: output `juanwang-skill.html` only. Do not create zip files, preview images, QR codes, `manifest.json`, or `sw.js` for normal delivery.
+- **Single HTML is the deliverable**: output exactly one `.html` file. Use a personalized safe filename by default (`juanwang-{nickname}-{goal-keyword}-{startDate}.html`) and respect an explicit user filename after sanitizing it and adding `.html` if needed. Do not create zip files, preview images, QR codes, `manifest.json`, or `sw.js` for normal delivery.
 - **Start date is required**: never invent a start date. If the user does not provide a concrete `YYYY-MM-DD` start date, ask for it before generating a plan.
+- **Nickname is optional**: ask for a preferred nickname/name at intake when natural, store it in `config.user.name`, and fall back to `小卷` without blocking generation.
 - **No fake progress**: new plans initialize with `checkins: {}`, `reviews: {}`, selected Day 1, 0 streak, 0% completion, and no placeholder dashboard data.
 - **Data drives UI**: dates, calendars, streaks, completion rates, phase review readiness, and report stats must be computed from `APP_DATA.dailyTasks` and `checkins`.
 - **Health-first workload**: protect sleep, recovery, and sustainable effort. If health data declines or the user reports overload, reduce future load before adding tasks.
